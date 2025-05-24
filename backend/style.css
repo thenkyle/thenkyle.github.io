@@ -135,6 +135,7 @@ body {
   height: calc(100vh - 4.5rem);
   flex: 1;
   min-width: 0;
+  max-width: calc(100vw - 240px);
 }
 /* 篩選區 */
 .filter-card {
@@ -368,6 +369,7 @@ body {
   border-radius: 0.5rem;
   box-shadow: 0 2px 6px var(--shadow);
   overflow: hidden;
+  width: 100%;
 }
 .table-header {
   display: flex;
@@ -402,12 +404,29 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 th, td {
   padding: 0.75rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid var(--border);
+  white-space: normal;
+  overflow: visible;
+  word-wrap: break-word;
+  word-break: break-all;
 }
+/* 設定各欄位寬度 */
+th:nth-child(1), td:nth-child(1) { width: 12%; } /* 報表編號 */
+th:nth-child(2), td:nth-child(2) { width: 18%; } /* 報表名稱 */
+th:nth-child(3), td:nth-child(3) { width: 13%; } /* 報表類型 */
+th:nth-child(4), td:nth-child(4) { width: 12%; } /* 統計區間 */
+th:nth-child(5), td:nth-child(5) { width: 10%; } /* 產生日期 */
+th:nth-child(6), td:nth-child(6) { width: 10%; } /* 產生者 */
+th:nth-child(7), td:nth-child(7) { width: 10%; } /* 狀態 */
+th:nth-child(8), td:nth-child(8) { 
+  width: 15%;
+  padding-right: 1rem;
+} /* 操作 */
 thead {
   background: #37a0ff;
   color: white;
@@ -420,6 +439,7 @@ tbody tr:hover {
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.875rem;
+  white-space: nowrap;
 }
 .tag.enable {
   background: #d1fae5;
@@ -431,14 +451,19 @@ tbody tr:hover {
   color: #ffffff;
 }
 .actions {
-  display: flex;
-  gap: 0.5rem;
+  white-space: nowrap;
 }
 .actions .material-icons {
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 0.25rem;
   transition: all 0.2s;
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.actions .material-icons:last-child {
+  margin-right: 0;
 }
 .actions .material-icons:hover {
   background: rgba(55, 160, 255, 0.1);

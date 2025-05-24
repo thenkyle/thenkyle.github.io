@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>平台使用率報表預覽</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+    }
+    .report-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .report-date {
+      text-align: right;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .report-table th,
+    .report-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .report-table th {
+      background-color: #fff;
+      font-weight: normal;
+    }
+    .report-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .report-footer {
+      margin-top: 20px;
+      padding: 12px;
+      border-top: 1px solid #ddd;
+      color: #666;
+    }
+    .report-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+    .report-actions button {
+      padding: 6px 12px;
+      margin-left: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+    }
+    @media print {
+      body {
+        padding: 20px;
+      }
+      .report-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-title">平台使用率報表</div>
+  <div class="report-date">匯出日期：2025/05/24</div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th class="text-center">項次</th>
+        <th>員工編號</th>
+        <th>員工姓名</th>
+        <th class="text-right">案件建立總筆數</th>
+        <th class="text-right">完成議價總筆數</th>
+        <th class="text-right">取消議價總筆數</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center">1</td>
+        <td>P001</td>
+        <td>王小明</td>
+        <td class="text-right">25</td>
+        <td class="text-right">20</td>
+        <td class="text-right">5</td>
+      </tr>
+      <tr>
+        <td class="text-center">2</td>
+        <td>P002</td>
+        <td>林美惠</td>
+        <td class="text-right">18</td>
+        <td class="text-right">15</td>
+        <td class="text-right">3</td>
+      </tr>
+      <tr>
+        <td class="text-center">3</td>
+        <td>P003</td>
+        <td>張育誠</td>
+        <td class="text-right">30</td>
+        <td class="text-right">28</td>
+        <td class="text-right">2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="report-footer">
+    共 3 筆
+  </div>
+
+  <div class="report-actions">
+    <button onclick="window.print()">列印報表</button>
+    <button onclick="window.close()">關閉預覽</button>
+  </div>
+</body>
+</html> 

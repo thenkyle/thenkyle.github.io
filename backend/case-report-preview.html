@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>案件統計報表預覽</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+    }
+    .report-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .report-date {
+      text-align: right;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .report-table th,
+    .report-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .report-table th {
+      background-color: #fff;
+      font-weight: normal;
+    }
+    .report-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    .report-footer {
+      margin-top: 20px;
+      padding: 12px;
+      border-top: 1px solid #ddd;
+      color: #666;
+    }
+    .report-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+    .report-actions button {
+      padding: 6px 12px;
+      margin-left: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+    }
+    .text-right {
+      text-align: right;
+    }
+    @media print {
+      body {
+        padding: 20px;
+      }
+      .report-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-title">案件統計報表</div>
+  <div class="report-date">匯出日期：2025/05/23</div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>公司別</th>
+        <th>詢價單號</th>
+        <th>採購員編</th>
+        <th>採購員姓名</th>
+        <th>月份</th>
+        <th>供應商編號</th>
+        <th>廠商名稱</th>
+        <th>項次</th>
+        <th>料件編號</th>
+        <th>品名規格</th>
+        <th>產品類別</th>
+        <th>廠牌</th>
+        <th>採購量(議前)</th>
+        <th>採購量(議後)</th>
+        <th class="text-right">議前成本單價</th>
+        <th class="text-right">議後成本單價</th>
+        <th class="text-right">CD金額(未稅)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A001</td>
+        <td>INQ20240501A</td>
+        <td>P123</td>
+        <td>王小明</td>
+        <td>May-24</td>
+        <td>V001</td>
+        <td>宏達電科技</td>
+        <td>1</td>
+        <td>MTR-1001</td>
+        <td>鋁合金支架</td>
+        <td>機構件</td>
+        <td>HTC</td>
+        <td class="text-right">100</td>
+        <td class="text-right">90</td>
+        <td class="text-right">200</td>
+        <td class="text-right">180</td>
+        <td class="text-right">16,200</td>
+      </tr>
+      <tr>
+        <td>A001</td>
+        <td>INQ20240501A</td>
+        <td>P123</td>
+        <td>王小明</td>
+        <td>May-24</td>
+        <td>V001</td>
+        <td>宏達電科技</td>
+        <td>2</td>
+        <td>PCB-5021</td>
+        <td>主機板組件</td>
+        <td>電子件</td>
+        <td>安基</td>
+        <td class="text-right">50</td>
+        <td class="text-right">50</td>
+        <td class="text-right">1,500</td>
+        <td class="text-right">1,400</td>
+        <td class="text-right">70,000</td>
+      </tr>
+      <tr>
+        <td>B002</td>
+        <td>INQ20240502B</td>
+        <td>P456</td>
+        <td>林美惠</td>
+        <td>May-24</td>
+        <td>V002</td>
+        <td>華碩股份有限公司</td>
+        <td>1</td>
+        <td>BAT-9987</td>
+        <td>鋰電池模組</td>
+        <td>電池件</td>
+        <td>ASUS</td>
+        <td class="text-right">30</td>
+        <td class="text-right">30</td>
+        <td class="text-right">800</td>
+        <td class="text-right">750</td>
+        <td class="text-right">22,500</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="report-footer">
+    共 3 筆
+  </div>
+
+  <div class="report-actions">
+    <button onclick="window.print()">列印報表</button>
+    <button onclick="window.close()">關閉預覽</button>
+  </div>
+</body>
+</html> 

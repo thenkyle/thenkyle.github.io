@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>綠色採購統計報表預覽</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+    }
+    .report-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .report-date {
+      text-align: right;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .report-table th,
+    .report-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .report-table th {
+      background-color: #fff;
+      font-weight: normal;
+    }
+    .report-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .report-footer {
+      margin-top: 20px;
+      padding: 12px;
+      border-top: 1px solid #ddd;
+      color: #666;
+    }
+    .report-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+    .report-actions button {
+      padding: 6px 12px;
+      margin-left: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+    }
+    @media print {
+      body {
+        padding: 20px;
+      }
+      .report-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-title">綠色採購統計報表</div>
+  <div class="report-date">匯出日期：2025/05/24</div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>公司名稱</th>
+        <th>環保標章(能源之星)</th>
+        <th>五大類名稱</th>
+        <th>供應商編號</th>
+        <th>供應商名稱</th>
+        <th>採購員</th>
+        <th>採購員姓名</th>
+        <th>項次</th>
+        <th>料件編號</th>
+        <th>品名</th>
+        <th>規格</th>
+        <th>單位</th>
+        <th class="text-right">訂購量</th>
+        <th class="text-right">台幣單價</th>
+        <th class="text-right">台幣總金額</th>
+        <th>原廠型號</th>
+        <th>廠牌</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>台灣分公司</td>
+        <td>是</td>
+        <td>資訊設備</td>
+        <td>SUP001</td>
+        <td>宏碁股份有限公司</td>
+        <td>P001</td>
+        <td>張育誠</td>
+        <td>1</td>
+        <td>NB-A001</td>
+        <td>筆記型電腦</td>
+        <td>Intel i7/16G/512G</td>
+        <td>台</td>
+        <td class="text-right">10</td>
+        <td class="text-right">32,000</td>
+        <td class="text-right">320,000</td>
+        <td>ACER-001</td>
+        <td>Acer</td>
+      </tr>
+      <tr>
+        <td>台灣分公司</td>
+        <td>否</td>
+        <td>機構材料</td>
+        <td>SUP002</td>
+        <td>正泰科技</td>
+        <td>P002</td>
+        <td>林佩珊</td>
+        <td>2</td>
+        <td>CH-2023</td>
+        <td>電源模組</td>
+        <td>24V 10A</td>
+        <td>組</td>
+        <td class="text-right">20</td>
+        <td class="text-right">1,500</td>
+        <td class="text-right">30,000</td>
+        <td>CHINT-2023</td>
+        <td>正泰</td>
+      </tr>
+      <tr>
+        <td>台灣分公司</td>
+        <td>是</td>
+        <td>辦公耗材</td>
+        <td>SUP003</td>
+        <td>永豐文具</td>
+        <td>P003</td>
+        <td>謝東翰</td>
+        <td>3</td>
+        <td>PEN-BLUE</td>
+        <td>原子筆</td>
+        <td>藍色/0.5mm</td>
+        <td>支</td>
+        <td class="text-right">100</td>
+        <td class="text-right">12</td>
+        <td class="text-right">1,200</td>
+        <td>PEN-001</td>
+        <td>Pilot</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="report-footer">
+    共 3 筆
+  </div>
+
+  <div class="report-actions">
+    <button onclick="window.print()">列印報表</button>
+    <button onclick="window.close()">關閉預覽</button>
+  </div>
+</body>
+</html> 

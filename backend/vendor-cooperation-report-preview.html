@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>廠商配合度統計報表預覽</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+    }
+    .report-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .report-date {
+      text-align: right;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .report-table th,
+    .report-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .report-table th {
+      background-color: #fff;
+      font-weight: normal;
+    }
+    .report-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .highlight-row {
+      background-color: #f0f9f0;
+    }
+    .report-footer {
+      margin-top: 20px;
+      padding: 12px;
+      border-top: 1px solid #ddd;
+      color: #666;
+    }
+    .report-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+    .report-actions button {
+      padding: 6px 12px;
+      margin-left: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+    }
+    @media print {
+      body {
+        padding: 20px;
+      }
+      .report-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-title">廠商配合度統計報表</div>
+  <div class="report-date">匯出日期：2025/05/24</div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>公司</th>
+        <th>年度</th>
+        <th>月份</th>
+        <th>供應商編號</th>
+        <th>廠商名稱</th>
+        <th class="text-right">回應案數</th>
+        <th class="text-right">總詢價案數</th>
+        <th class="text-right">回應比例%</th>
+        <th class="text-right">4小時內回應案數(10分)</th>
+        <th class="text-right">4~8小時回應案數(5分)</th>
+        <th class="text-right">1天~3天回應案數(3分)</th>
+        <th class="text-right">3天以上回應案數(1分)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>總公司</td>
+        <td>2024</td>
+        <td>5</td>
+        <td>V001</td>
+        <td>宏基股份有限公司</td>
+        <td class="text-right">8</td>
+        <td class="text-right">10</td>
+        <td class="text-right">80%</td>
+        <td class="text-right">6</td>
+        <td class="text-right">1</td>
+        <td class="text-right">1</td>
+        <td class="text-right">0</td>
+      </tr>
+      <tr>
+        <td>總公司</td>
+        <td>2024</td>
+        <td>5</td>
+        <td>V002</td>
+        <td>華碩電腦股份有限公司</td>
+        <td class="text-right">5</td>
+        <td class="text-right">10</td>
+        <td class="text-right">50%</td>
+        <td class="text-right">2</td>
+        <td class="text-right">1</td>
+        <td class="text-right">1</td>
+        <td class="text-right">1</td>
+      </tr>
+      <tr class="">
+        <td>分公司台中</td>
+        <td>2024</td>
+        <td>5</td>
+        <td>V003</td>
+        <td>永豐科技</td>
+        <td class="text-right">3</td>
+        <td class="text-right">5</td>
+        <td class="text-right">60%</td>
+        <td class="text-right">1</td>
+        <td class="text-right">0</td>
+        <td class="text-right">2</td>
+        <td class="text-right">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="report-footer">
+    共 3 筆
+  </div>
+
+  <div class="report-actions">
+    <button onclick="window.print()">列印報表</button>
+    <button onclick="window.close()">關閉預覽</button>
+  </div>
+</body>
+</html> 

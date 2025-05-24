@@ -60,149 +60,62 @@
 
   <!-- Main -->
   <main class="main">
-    <!-- 報表列表區域 -->
-    <div class="reports-section">
-      <div class="section-header">
-        <h2>報表類型</h2>
+    <!-- 查詢條件區塊 -->
+    <div class="filter-card">
+      <div class="form-group">
+        <label for="report-type">報表類型</label>
+        <select id="report-type">
+          <option value="all">全部報表</option>
+          <option value="case">案件統計報表</option>
+          <option value="cost">Cost Down統計報表</option>
+          <option value="platform">平台使用率統計報表</option>
+          <option value="vendor">廠商配合度統計報表</option>
+          <option value="green">綠色採購統計報表</option>
+          <option value="carbon">碳排放統計報表</option>
+          <option value="survey">問券統計報表</option>
+        </select>
       </div>
-      
-      <div class="reports-list">
-        <!-- 案件統計報表 -->
-        <div class="report-item">
-          <div class="report-icon">
-            <span class="material-icons">description</span>
-          </div>
-          <div class="report-info">
-            <div class="report-title">案件統計報表</div>
-            <div class="report-desc">統計案件次數、完成率、取消率及採購人員資訊</div>
-          </div>
-          <div class="report-filters">
-            <select>
-              <option>選擇時間範圍</option>
-              <option>本月</option>
-              <option>上月</option>
-              <option>本季</option>
-              <option>本年</option>
-            </select>
-            <select>
-              <option>選擇採購人員</option>
-              <option>全部</option>
-              <option>依部門</option>
-              <option>個別人員</option>
-            </select>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view">查看資料</button>
-            <button class="btn-download">下載報表</button>
-          </div>
-        </div>
-
-        <!-- Cost Down 統計報表 -->
-        <div class="report-item">
-          <div class="report-icon">
-            <span class="material-icons">trending_down</span>
-          </div>
-          <div class="report-info">
-            <div class="report-title">Cost Down 統計報表</div>
-            <div class="report-desc">降價幅度前五大廠商及產品類別排行</div>
-          </div>
-          <div class="report-filters">
-            <select>
-              <option>時間範圍</option>
-              <option>月度</option>
-              <option>季度</option>
-              <option>年度</option>
-            </select>
-            <select>
-              <option>排序方式</option>
-              <option>依降價幅度</option>
-              <option>依總金額</option>
-            </select>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view">查看資料</button>
-            <button class="btn-download">下載報表</button>
-          </div>
-        </div>
-
-        <!-- 平台使用率報表 -->
-        <div class="report-item">
-          <div class="report-icon">
-            <span class="material-icons">analytics</span>
-          </div>
-          <div class="report-info">
-            <div class="report-title">平台使用率報表</div>
-            <div class="report-desc">採購人員與供應商系統使用次數統計</div>
-          </div>
-          <div class="report-filters">
-            <select>
-              <option>使用者類型</option>
-              <option>採購人員</option>
-              <option>供應商</option>
-              <option>全部</option>
-            </select>
-            <select>
-              <option>統計週期</option>
-              <option>每日</option>
-              <option>每週</option>
-              <option>每月</option>
-            </select>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view">查看資料</button>
-            <button class="btn-download">下載報表</button>
-          </div>
-        </div>
-
-        <!-- 廠商配合度統計報表 -->
-        <div class="report-item">
-          <div class="report-icon">
-            <span class="material-icons">timer</span>
-          </div>
-          <div class="report-info">
-            <div class="report-title">廠商配合度統計報表</div>
-            <div class="report-desc">供應商回應時間統計分析</div>
-          </div>
-          <div class="report-filters">
-            <select>
-              <option>回應時間區間</option>
-              <option>4小時內</option>
-              <option>4-8小時</option>
-              <option>1-3天</option>
-              <option>3天以上</option>
-            </select>
-            <select>
-              <option>廠商類型</option>
-              <option>全部廠商</option>
-              <option>依產品類別</option>
-              <option>依合作狀態</option>
-            </select>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view">查看資料</button>
-            <button class="btn-download">下載報表</button>
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="date-range">統計區間</label>
+        <select id="date-range">
+          <option value="">請選擇</option>
+          <option value="today">今日</option>
+          <option value="week">本週</option>
+          <option value="month">本月</option>
+          <option value="quarter">本季</option>
+          <option value="year">本年</option>
+          <option value="custom">自訂區間</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="start-date">起始日期</label>
+        <input type="date" id="start-date"/>
+      </div>
+      <div class="form-group">
+        <label for="end-date">結束日期</label>
+        <input type="date" id="end-date"/>
+      </div>
+      <div class="form-group">
+        <label for="creator">產生者</label>
+        <select id="creator">
+          <option value="">請選擇</option>
+          <option value="all">全部</option>
+          <option value="system">系統管理員</option>
+          <option value="purchase">採購A</option>
+          <option value="esg">ESG專員</option>
+          <option value="quality">品管主管</option>
+          <option value="finance">財務主管</option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button class="btn-secondary">重設</button>
+        <button class="btn-primary">查詢</button>
+        <button class="btn-primary">產生報表</button>
       </div>
     </div>
 
-    <!-- 報表歷史記錄 -->
+    <!-- 查詢結果區塊 -->
     <div class="card table">
-      <div class="table-header">
-        <h2>報表歷史記錄</h2>
-        <div class="filter-group">
-          <select>
-            <option>報表類型</option>
-            <option>案件統計報表</option>
-            <option>Cost Down統計報表</option>
-            <option>平台使用率報表</option>
-            <option>廠商配合度報表</option>
-          </select>
-          <input type="date" placeholder="起始日期"/>
-          <input type="date" placeholder="結束日期"/>
-          <button>搜尋</button>
-        </div>
-      </div>
       <table>
         <thead>
           <tr>
@@ -223,7 +136,91 @@
             <td>案件統計報表</td>
             <td>2024/01-2024/03</td>
             <td>2024/03/15</td>
-            <td>系統管理員</td>
+            <td>-</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看" onclick="window.open('case-report-preview.html', '_blank')">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-2-2024002</td>
+            <td>2024年2月Cost Down分析</td>
+            <td>Cost Down統計報表</td>
+            <td>2024/02</td>
+            <td>2024/03/01</td>
+            <td>採購A</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-3-2024003</td>
+            <td>2024年Q1平台使用分析</td>
+            <td>平台使用率統計報表</td>
+            <td>2024/01-2024/03</td>
+            <td>2024/03/15</td>
+            <td>-</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看" onclick="window.open('platform-usage-report-preview.html', '_blank')">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-4-2024004</td>
+            <td>2024年Q1廠商配合度分析</td>
+            <td>廠商配合度統計報表</td>
+            <td>2024/01-2024/03</td>
+            <td>2024/03/15</td>
+            <td>-</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看" onclick="window.open('vendor-cooperation-report-preview.html', '_blank')">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-5-2024005</td>
+            <td>2023年度綠色採購報告</td>
+            <td>綠色採購統計報表</td>
+            <td>2023年度</td>
+            <td>2024/01/15</td>
+            <td>採購A</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看" onclick="window.open('green-purchase-report-preview.html', '_blank')">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-6-2024006</td>
+            <td>2024年Q1碳排放統計</td>
+            <td>碳排放統計報表</td>
+            <td>2024/01-2024/03</td>
+            <td>2024/03/15</td>
+            <td>-</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看" onclick="window.open('carbon-emission-report-preview.html', '_blank')">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+          <tr>
+            <td>B6-7-2024007</td>
+            <td>2024年Q1供應商滿意度調查</td>
+            <td>問券統計報表</td>
+            <td>2024/01-2024/03</td>
+            <td>2024/03/15</td>
+            <td>-</td>
             <td><span class="tag enable">已完成</span></td>
             <td class="actions">
               <span class="material-icons" title="查看">visibility</span>
