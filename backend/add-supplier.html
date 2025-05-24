@@ -8,7 +8,92 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./style.css" rel="stylesheet">
   <style>
+    /* 跑馬燈樣式 */
+    .ticker {
+      position: fixed;
+      top: 0;
+      left: 200px;
+      right: 0;
+      background: #e0f7fa;
+      padding: 0.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      z-index: 10;
+      min-width: calc(100% - 200px);
+    }
+
+    .ticker a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .ticker a:hover {
+      color: #1d4ed8;
+    }
+
+    /* 調整 header 位置，避免被跑馬燈遮擋 */
+    .header {
+        position: fixed;
+  top: 2rem;
+  left: 200px;
+  right: 0;
+  background: #fff;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px var(--shadow);
+  z-index: 9;
+  min-width: calc(100% - 200px);
+    }
+
+    .header .left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      color: var(--text);
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .header .back-button:hover {
+      background: #f1f5f9;
+    }
+
+    .header .title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .header .right {
+      display: flex;
+      align-items: center;
+    }
+
+    .header .right .material-icons {
+      font-size: 2rem;
+      color: var(--text);
+      opacity: 0.5;
+    }
+
+    /* 調整 main 內容區域的位置 */
     .main {
+      margin-top: 7rem;
       padding: 1.5rem;
       background: #f8fafc;
     }
@@ -179,6 +264,12 @@
       </a>
     </nav>
   </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
 
   <!-- Header -->
   <header class="header">
