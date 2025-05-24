@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>案件管理 - 供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .case-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .case-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-group {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .info-group h3 {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-group p {
+      font-size: 1rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+    }
+
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--primary);
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .document-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .document-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+    }
+
+    .document-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #f0f9ff;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .document-info {
+      flex: 1;
+    }
+
+    .document-info h4 {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .document-info p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .document-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .document-button {
+      padding: 0.5rem;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 0.375rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .document-button:hover {
+      background: #f8fafc;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .action-button {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .secondary-button {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .document-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .document-link:hover {
+      text-decoration: underline;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .chat-message {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 80%;
+    }
+
+    .chat-message.own-message {
+      align-self: flex-end;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .own-message .message-header {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .avatar.supplier {
+      background: #f0f9ff;
+      color: #0369a1;
+    }
+
+    .avatar .material-icons {
+      font-size: 1.5rem;
+    }
+
+    .message-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sender-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .message-time {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .message-content {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .own-message .message-content {
+      background: var(--primary-light);
+    }
+
+    .message-attachment {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .message-attachment .material-icons {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="../dashboard.html">
+        <span class="material-icons">home</span>
+        首頁
+      </a>
+      <a href="./index.html" class="active">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="../announcements.html">
+        <span class="material-icons">campaign</span>
+        公告訊息
+      </a>
+      <a href="../payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="../csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="../esg.html">
+        <span class="material-icons">eco</span>
+        ESG文件簽署
+      </a>
+      <a href="../carbon.html">
+        <span class="material-icons">cloud</span>
+        碳排放資料
+      </a>
+      <a href="../green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請盡速更新&nbsp;&nbsp;
+    <a href="../announcements.html">查看詳情</a>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div style="padding: 1.5rem;">
+        <!-- 案件標題與狀態 -->
+        <div class="case-header">
+          <div>
+            <h2 style="margin-bottom: 0.5rem;">IT設備更新專案</h2>
+            <p style="color: var(--text-secondary); margin: 0;">案件編號：RFQ-2024-002</p>
+          </div>
+          <div class="case-status">
+            <span class="material-icons">sync</span>
+            處理中
+          </div>
+        </div>
+
+        <!-- 案件基本資訊 -->
+        <div class="case-info">
+          <div class="info-group">
+            <h3>發布日期</h3>
+            <p>2024/03/05</p>
+          </div>
+          <div class="info-group">
+            <h3>截止日期</h3>
+            <p>2024/03/20</p>
+          </div>
+          <div class="info-group">
+            <h3>採購單位</h3>
+            <p>資訊部</p>
+          </div>
+          <div class="info-group">
+            <h3>聯絡人</h3>
+            <p>王小明</p>
+          </div>
+        </div>
+
+        <!-- 標籤頁 -->
+        <div class="tabs">
+          <div class="tab">案件進度</div>
+          <div class="tab">相關文件</div>
+          <div class="tab">需求更新歷程</div>
+          <div class="tab">報價回覆/變更歷程</div>
+          <div class="tab">交期歷程</div>
+          <div class="tab active">Team+紀錄</div>
+        </div>
+
+        <!-- 案件進度時間軸 (預設隱藏) -->
+        <div class="timeline" style="display: none;">
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/10 15:30</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">報價單已上傳</h4>
+              <p style="margin: 0; color: var(--text-secondary);">已上傳初版報價單，等待採購單位審核。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/08 10:15</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">規格確認完成</h4>
+              <p style="margin: 0; color: var(--text-secondary);">已確認所有設備規格需求，開始準備報價。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/05 09:00</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">案件發布</h4>
+              <p style="margin: 0; color: var(--text-secondary);">案件已發布，開始接受報價。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 相關文件 (預設隱藏) -->
+        <div class="document-list" style="display: none;">
+          <div class="document-item">
+            <div class="document-icon">
+              <span class="material-icons">description</span>
+            </div>
+            <div class="document-info">
+              <h4>設備規格需求書</h4>
+              <p>上傳時間：2024/03/05</p>
+            </div>
+            <div class="document-actions">
+              <button class="document-button">
+                <span class="material-icons">visibility</span>
+              </button>
+              <button class="document-button">
+                <span class="material-icons">download</span>
+              </button>
+            </div>
+          </div>
+          <div class="document-item">
+            <div class="document-icon">
+              <span class="material-icons">description</span>
+            </div>
+            <div class="document-info">
+              <h4>報價單v1</h4>
+              <p>上傳時間：2024/03/10</p>
+            </div>
+            <div class="document-actions">
+              <button class="document-button">
+                <span class="material-icons">visibility</span>
+              </button>
+              <button class="document-button">
+                <span class="material-icons">download</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 需求更新歷程 (預設隱藏) -->
+        <div class="timeline" style="display: none;">
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/12 14:30</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">規格需求變更</h4>
+              <p style="margin: 0 0 0.5rem; color: var(--text-secondary);">採購單位更新了設備規格需求：</p>
+              <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem;">
+                <div style="color: #dc2626;">- 移除：15吋筆記型電腦 x 10台</div>
+                <div style="color: #059669;">+ 新增：14吋筆記型電腦 x 15台</div>
+                <div style="color: #059669;">+ 新增：無線滑鼠 x 15個</div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/07 11:20</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">交貨時程調整</h4>
+              <p style="margin: 0; color: var(--text-secondary);">
+                原定交貨日期從 2024/04/15 調整為 2024/04/30，以確保所有設備都能準時到貨。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 報價回覆/變更歷程 -->
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/15 16:45</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">報價單更新 - 版本 2</h4>
+              <p style="margin: 0 0 0.5rem; color: var(--text-secondary);">根據新規格需求更新報價：</p>
+              <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem;">
+                <div style="margin-bottom: 0.5rem;">
+                  <span style="color: var(--text-secondary);">報價總金額：</span>
+                  <span style="color: #059669; font-weight: 500;">NT$ 750,000</span>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                  <span style="color: var(--text-secondary);">預估交期：</span>
+                  <span>2024/04/30</span>
+                </div>
+                <div style="color: var(--text-secondary);">備註：包含無線滑鼠配件及安裝設定服務</div>
+              </div>
+              <div style="margin-top: 1rem;">
+                <a href="#" class="document-link">
+                  <span class="material-icons" style="font-size: 1rem;">description</span>
+                  查看報價單
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/10 15:30</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">初次報價單上傳 - 版本 1</h4>
+              <p style="margin: 0 0 0.5rem; color: var(--text-secondary);">首次報價內容：</p>
+              <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem;">
+                <div style="margin-bottom: 0.5rem;">
+                  <span style="color: var(--text-secondary);">報價總金額：</span>
+                  <span style="color: #059669; font-weight: 500;">NT$ 600,000</span>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                  <span style="color: var(--text-secondary);">預估交期：</span>
+                  <span>2024/04/15</span>
+                </div>
+                <div style="color: var(--text-secondary);">備註：含基本安裝設定服務</div>
+              </div>
+              <div style="margin-top: 1rem;">
+                <a href="#" class="document-link">
+                  <span class="material-icons" style="font-size: 1rem;">description</span>
+                  查看報價單
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 交期歷程 -->
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/12 14:30</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">交期調整 - 因應規格變更</h4>
+              <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem;">
+                <div style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 1rem;">
+                  <div>
+                    <div style="color: var(--text-secondary);">原預計交期</div>
+                    <div style="color: #dc2626; text-decoration: line-through;">2024/04/15</div>
+                  </div>
+                  <span class="material-icons" style="color: var(--text-secondary);">arrow_forward</span>
+                  <div>
+                    <div style="color: var(--text-secondary);">新預計交期</div>
+                    <div style="color: #059669; font-weight: 500;">2024/04/30</div>
+                  </div>
+                </div>
+                <div style="color: var(--text-secondary);">
+                  調整原因：因應新增設備數量及規格變更，供應商需要較長備貨時間
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024/03/07 11:20</div>
+            <div class="timeline-content">
+              <h4 style="margin: 0 0 0.5rem;">初始交期設定</h4>
+              <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; font-size: 0.875rem;">
+                <div style="margin-bottom: 0.5rem;">
+                  <div style="color: var(--text-secondary);">預計交期</div>
+                  <div style="color: var(--text); font-weight: 500;">2024/04/15</div>
+                </div>
+                <div style="color: var(--text-secondary);">
+                  備註：標準交貨時程，含基本安裝設定時間
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team+ 聊天紀錄 -->
+        <div class="chat-container">
+          <div class="chat-message">
+            <div class="message-header">
+              <div class="avatar">
+                <span class="material-icons">account_circle</span>
+              </div>
+              <div class="message-info">
+                <div class="sender-name">王小明（採購人員）</div>
+                <div class="message-time">2024/03/12 14:30</div>
+              </div>
+            </div>
+            <div class="message-content">
+              您好，關於新增的無線滑鼠規格，需要支援藍牙 5.0 以上版本，請問有符合的產品嗎？
+            </div>
+          </div>
+
+          <div class="chat-message own-message">
+            <div class="message-header">
+              <div class="message-info">
+                <div class="sender-name">陳大文（供應商）</div>
+                <div class="message-time">2024/03/12 15:15</div>
+              </div>
+              <div class="avatar supplier">
+                <span class="material-icons">business</span>
+              </div>
+            </div>
+            <div class="message-content">
+              有的，我們可以提供 Logitech MX Master 3S，支援藍牙 5.0，另外還支援 USB 接收器雙模式。
+              <div class="message-attachment">
+                <span class="material-icons">attach_file</span>
+                <span>產品規格表.pdf</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-message">
+            <div class="message-header">
+              <div class="avatar">
+                <span class="material-icons">account_circle</span>
+              </div>
+              <div class="message-info">
+                <div class="sender-name">王小明（採購人員）</div>
+                <div class="message-time">2024/03/12 15:45</div>
+              </div>
+            </div>
+            <div class="message-content">
+              好的，規格符合需求。請問有現貨嗎？需要 15 個。
+            </div>
+          </div>
+
+          <div class="chat-message own-message">
+            <div class="message-header">
+              <div class="message-info">
+                <div class="sender-name">陳大文（供應商）</div>
+                <div class="message-time">2024/03/12 16:00</div>
+              </div>
+              <div class="avatar supplier">
+                <span class="material-icons">business</span>
+              </div>
+            </div>
+            <div class="message-content">
+              目前倉庫有 10 個現貨，剩餘 5 個需要調貨，預計 3-5 個工作天可到貨。
+            </div>
+          </div>
+        </div>
+
+        <!-- 無聊天紀錄顯示 (預設隱藏) -->
+        <div class="no-records" style="display: none; text-align: center; padding: 3rem 1rem;">
+          <span class="material-icons" style="font-size: 4rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            chat_off
+          </span>
+          <p style="color: var(--text-secondary); margin: 0;">
+            目前尚無 Team+ 聊天紀錄
+          </p>
+        </div>
+
+        <!-- 操作按鈕 -->
+        <div class="action-bar">
+          <button class="action-button primary-button">
+            <span class="material-icons">edit</span>
+            修改報價
+          </button>
+          <button class="action-button secondary-button">
+            <span class="material-icons">history</span>
+            查看歷程
+          </button>
+          <button class="action-button secondary-button">
+            <span class="material-icons">chat</span>
+            發送訊息
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 標籤頁切換功能
+    document.querySelectorAll('.tab').forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        // 移除所有標籤的 active 狀態
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        // 添加當前標籤的 active 狀態
+        tab.classList.add('active');
+
+        // 隱藏所有內容
+        document.querySelectorAll('.timeline, .document-list, .chat-container, .no-records').forEach(content => {
+          content.style.display = 'none';
+        });
+
+        // 顯示對應內容
+        const contents = [
+          document.querySelectorAll('.timeline')[0],
+          document.querySelector('.document-list'),
+          document.querySelectorAll('.timeline')[1],
+          document.querySelectorAll('.timeline')[2],
+          document.querySelectorAll('.timeline')[3],
+          document.querySelector('.chat-container')
+        ];
+
+        // 檢查是否有聊天紀錄
+        if (index === 5) { // Team+ 紀錄標籤
+          const hasRecords = document.querySelector('.chat-container').querySelectorAll('.chat-message').length > 0;
+          if (hasRecords) {
+            document.querySelector('.chat-container').style.display = 'flex';
+            document.querySelector('.no-records').style.display = 'none';
+          } else {
+            document.querySelector('.chat-container').style.display = 'none';
+            document.querySelector('.no-records').style.display = 'block';
+          }
+        } else {
+          contents[index].style.display = index === 1 ? 'grid' : 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

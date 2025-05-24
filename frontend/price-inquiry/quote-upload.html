@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>報價單上傳 - 供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    .upload-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: var(--text);
+      background-color: white;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 0.5rem;
+      padding: 2rem;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-text {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-hint {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .file-list {
+      margin-top: 1.5rem;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-icon {
+      color: var(--primary);
+    }
+
+    .file-info {
+      flex: 1;
+    }
+
+    .file-name {
+      font-size: 0.875rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .file-size {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .file-remove {
+      padding: 0.5rem;
+      border: none;
+      background: none;
+      color: #dc2626;
+      cursor: pointer;
+      border-radius: 0.25rem;
+    }
+
+    .file-remove:hover {
+      background: #fee2e2;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .submit-button:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+    }
+
+    /* 提示訊息樣式 */
+    .toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: slideIn 0.3s ease-out;
+      z-index: 1000;
+    }
+
+    .toast.success {
+      background: #059669;
+    }
+
+    .toast.error {
+      background: #dc2626;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="../dashboard.html">
+        <span class="material-icons">home</span>
+        首頁
+      </a>
+      <a href="./index.html" class="active">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="../announcements.html">
+        <span class="material-icons">campaign</span>
+        公告訊息
+      </a>
+      <a href="../payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="../csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="../esg.html">
+        <span class="material-icons">eco</span>
+        ESG文件簽署
+      </a>
+      <a href="../carbon.html">
+        <span class="material-icons">cloud</span>
+        碳排放資料
+      </a>
+      <a href="../green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請盡速更新&nbsp;&nbsp;
+    <a href="../announcements.html">查看詳情</a>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div style="padding: 1.5rem;">
+        <h2 style="margin-bottom: 1.5rem;">報價單上傳</h2>
+        
+        <div class="upload-container">
+          <!-- 案件選擇 -->
+          <div class="form-group">
+            <label>選擇案件</label>
+            <select id="caseSelect">
+              <option value="">請選擇案件</option>
+              <option value="RFQ-2024-001">RFQ-2024-001 - 2024年度辦公用品採購</option>
+              <option value="RFQ-2024-002">RFQ-2024-002 - IT設備更新專案</option>
+              <option value="RFQ-2024-003">RFQ-2024-003 - 環保包材採購</option>
+            </select>
+          </div>
+
+          <!-- 檔案上傳區域 -->
+          <div class="upload-area" id="dropZone">
+            <input type="file" id="fileInput" style="display: none;" accept=".pdf,.doc,.docx,.xls,.xlsx">
+            <span class="material-icons upload-icon">cloud_upload</span>
+            <div class="upload-text">拖曳檔案至此或點擊上傳</div>
+            <div class="upload-hint">支援的檔案格式：PDF、Word、Excel</div>
+          </div>
+
+          <!-- 已選擇的檔案列表 -->
+          <div class="file-list" id="fileList"></div>
+
+          <!-- 上傳按鈕 -->
+          <button class="submit-button" id="submitButton" disabled>
+            <span class="material-icons">upload</span>
+            上傳報價單
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 檔案上傳相關功能
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+    const submitButton = document.getElementById('submitButton');
+    const caseSelect = document.getElementById('caseSelect');
+    let selectedFile = null;
+
+    // 點擊上傳區域觸發檔案選擇
+    dropZone.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    // 處理檔案選擇
+    fileInput.addEventListener('change', handleFileSelect);
+
+    // 拖放功能
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'var(--primary)';
+      dropZone.style.background = 'var(--primary-light)';
+    });
+
+    dropZone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'var(--border)';
+      dropZone.style.background = '#f8fafc';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'var(--border)';
+      dropZone.style.background = '#f8fafc';
+      
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        handleFileSelect({ target: { files } });
+      }
+    });
+
+    // 處理檔案選擇
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file) {
+        selectedFile = file;
+        updateFileList(file);
+        validateForm();
+      }
+    }
+
+    // 更新檔案列表
+    function updateFileList(file) {
+      fileList.innerHTML = `
+        <div class="file-item">
+          <span class="material-icons file-icon">description</span>
+          <div class="file-info">
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${formatFileSize(file.size)}</div>
+          </div>
+          <button class="file-remove" onclick="removeFile()">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      `;
+    }
+
+    // 移除檔案
+    function removeFile() {
+      selectedFile = null;
+      fileList.innerHTML = '';
+      fileInput.value = '';
+      validateForm();
+    }
+
+    // 格式化檔案大小
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // 表單驗證
+    function validateForm() {
+      submitButton.disabled = !selectedFile || !caseSelect.value;
+    }
+
+    // 監聽案件選擇變更
+    caseSelect.addEventListener('change', validateForm);
+
+    // 顯示提示訊息
+    function showToast(message, type) {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <span class="material-icons">${type === 'success' ? 'check_circle' : 'error'}</span>
+        ${message}
+      `;
+      document.body.appendChild(toast);
+
+      // 3秒後移除提示訊息
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // 處理表單提交
+    submitButton.addEventListener('click', async () => {
+      if (!selectedFile || !caseSelect.value) return;
+
+      // 模擬上傳過程
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="material-icons">hourglass_empty</span>上傳中...';
+
+      try {
+        // 這裡應該是實際的檔案上傳邏輯
+        await new Promise(resolve => setTimeout(resolve, 2000)); // 模擬上傳延遲
+        
+        // 上傳成功
+        showToast('上傳成功', 'success');
+        setTimeout(() => {
+          window.location.href = `./case-management.html?id=${caseSelect.value}`;
+        }, 1500);
+      } catch (error) {
+        // 上傳失敗
+        showToast('上傳失敗', 'error');
+        submitButton.disabled = false;
+        submitButton.innerHTML = '<span class="material-icons">upload</span>上傳報價單';
+      }
+    });
+  </script>
+</body>
+</html> 

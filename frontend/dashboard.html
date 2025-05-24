@@ -8,44 +8,118 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="style.css" rel="stylesheet">
+  <style>
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-item > a:hover,
+    .nav-item > a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .nav-item .material-icons.expand {
+      margin-left: auto;
+      font-size: 1.25rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-item.expanded .material-icons.expand {
+      transform: rotate(180deg);
+    }
+
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+
+    .nav-item.expanded .submenu {
+      max-height: 500px;
+    }
+
+    .submenu a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem 0.75rem 3rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .submenu a:hover,
+    .submenu a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+  </style>
 </head>
 <body>
   <!-- 側邊選單 -->
   <aside class="sidebar">
     <div class="logo">供應商平台</div>
     <nav>
-      <a href="dashboard.html" class="active">
-        <span class="material-icons">home</span>
-        首頁
-      </a>
-      <a href="price-inquiry.html">
-        <span class="material-icons">request_quote</span>
-        詢比議價案件
-      </a>
-      <a href="announcements.html">
-        <span class="material-icons">campaign</span>
-        公告訊息
-      </a>
-      <a href="payment.html">
-        <span class="material-icons">payments</span>
-        付款查詢
-      </a>
-      <a href="csr.html">
-        <span class="material-icons">policy</span>
-        CSR行為準則
-      </a>
-      <a href="esg.html">
-        <span class="material-icons">eco</span>
-        ESG文件簽署
-      </a>
-      <a href="carbon.html">
-        <span class="material-icons">cloud</span>
-        碳排放資料
-      </a>
-      <a href="green.html">
-        <span class="material-icons">forest</span>
-        綠色採購
-      </a>
+      <div class="nav-item">
+        <a href="dashboard.html" class="active">
+          <span class="material-icons">home</span>
+          首頁
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="price-inquiry/index.html">
+          <span class="material-icons">request_quote</span>
+          詢比議價案件
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="announcements.html">
+          <span class="material-icons">campaign</span>
+          公告訊息
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="payment.html">
+          <span class="material-icons">payments</span>
+          付款查詢
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="csr.html">
+          <span class="material-icons">policy</span>
+          CSR行為準則
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="esg.html">
+          <span class="material-icons">eco</span>
+          ESG文件簽署
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="carbon.html">
+          <span class="material-icons">cloud</span>
+          碳排放資料
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="green.html">
+          <span class="material-icons">forest</span>
+          綠色採購
+        </a>
+      </div>
     </nav>
   </aside>
 
@@ -96,7 +170,7 @@
       <div style="padding: 1.5rem;">
         <h3 style="margin-bottom: 1rem;">快速連結</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-          <a href="price-inquiry.html" class="quick-link">
+          <a href="price-inquiry/list.html" class="quick-link">
             <span class="material-icons">request_quote</span>
             <span>詢比議價案件</span>
           </a>
@@ -116,5 +190,18 @@
       </div>
     </div>
   </main>
+
+  <!-- <script>
+    // 子選單展開/收合功能
+    document.querySelectorAll('.nav-item > a').forEach(item => {
+      item.addEventListener('click', (e) => {
+        const hasSubmenu = e.currentTarget.parentElement.querySelector('.submenu');
+        if (hasSubmenu) {
+          e.preventDefault();
+          e.currentTarget.parentElement.classList.toggle('expanded');
+        }
+      });
+    });
+  </script> -->
 </body>
 </html> 

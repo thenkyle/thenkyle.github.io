@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>案件管理 - 供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    .search-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-button {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-button:hover {
+      background: var(--primary-dark);
+    }
+
+    .case-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .case-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+    }
+
+    .case-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .case-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .case-id {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .case-status {
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-won {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-lost {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .case-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-value {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .case-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      background: white;
+      color: var(--text);
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .action-button:hover {
+      background: var(--background);
+    }
+
+    .action-button.primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .action-button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="../dashboard.html">
+        <span class="material-icons">home</span>
+        首頁
+      </a>
+      <a href="./index.html" class="active">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="../announcements.html">
+        <span class="material-icons">campaign</span>
+        公告訊息
+      </a>
+      <a href="../payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="../csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="../esg.html">
+        <span class="material-icons">eco</span>
+        ESG文件簽署
+      </a>
+      <a href="../carbon.html">
+        <span class="material-icons">cloud</span>
+        碳排放資料
+      </a>
+      <a href="../green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請盡速更新&nbsp;&nbsp;
+    <a href="../announcements.html">查看詳情</a>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div style="padding: 1.5rem;">
+        <h2 style="margin-bottom: 1.5rem;">案件管理</h2>
+        
+        <!-- 搜尋區域 -->
+        <div class="search-container">
+          <input type="text" class="search-input" id="searchInput" placeholder="搜尋案件編號或名稱..." />
+          <button class="search-button" onclick="searchCases()">
+            <span class="material-icons">search</span>
+            搜尋
+          </button>
+        </div>
+
+        <!-- 案件列表 -->
+        <div class="case-list" id="caseList"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 模擬案件資料
+    const cases = [
+      {
+        id: 'RFQ-2024-002',
+        title: 'IT設備更新專案',
+        status: 'won',
+        statusText: '得標',
+        deadline: '2024/03/15',
+        budget: 'NT$ 2,000,000',
+        contact: '李大華',
+        department: '資訊部'
+      },
+      {
+        id: 'RFQ-2024-003',
+        title: '環保包材採購',
+        status: 'lost',
+        statusText: '未得標',
+        deadline: '2024/02/28',
+        budget: 'NT$ 300,000',
+        contact: '張美玲',
+        department: '採購部'
+      }
+    ];
+
+    // 渲染案件列表
+    function renderCases(filteredCases = cases) {
+      const caseList = document.getElementById('caseList');
+      
+      if (filteredCases.length === 0) {
+        caseList.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons empty-icon">search_off</span>
+            <div>沒有找到符合條件的案件</div>
+          </div>
+        `;
+        return;
+      }
+
+      caseList.innerHTML = filteredCases.map(case_ => `
+        <div class="case-item">
+          <div class="case-header">
+            <div>
+              <h3 class="case-title">${case_.title}</h3>
+              <div class="case-id">${case_.id}</div>
+            </div>
+            <div class="case-status status-${case_.status}">${case_.statusText}</div>
+          </div>
+          <div class="case-info">
+            <div class="info-item">
+              <span class="info-label">截止日期</span>
+              <span class="info-value">${case_.deadline}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">預算金額</span>
+              <span class="info-value">${case_.budget}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">聯絡人</span>
+              <span class="info-value">${case_.contact}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">需求單位</span>
+              <span class="info-value">${case_.department}</span>
+            </div>
+          </div>
+          <div class="case-actions">
+            <button class="action-button" onclick="viewCaseDetails('${case_.id}')">
+              <span class="material-icons">visibility</span>
+              查看詳情
+            </button>
+            ${case_.status === 'pending' ? `
+              <button class="action-button primary" onclick="uploadQuote('${case_.id}')">
+                <span class="material-icons">upload_file</span>
+                上傳報價單
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 搜尋案件
+    function searchCases() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredCases = cases.filter(case_ => 
+        case_.id.toLowerCase().includes(searchTerm) || 
+        case_.title.toLowerCase().includes(searchTerm)
+      );
+      renderCases(filteredCases);
+    }
+
+    // 查看案件詳情
+    function viewCaseDetails(caseId) {
+      window.location.href = `./case-details.html?id=${caseId}`;
+    }
+
+    // 上傳報價單
+    function uploadQuote(caseId) {
+      window.location.href = `./quote-upload.html?id=${caseId}`;
+    }
+
+    // 監聽搜尋輸入
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchCases();
+      }
+    });
+
+    // 初始渲染
+    renderCases();
+  </script>
+</body>
+</html> 
