@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Mobile首頁管理 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html" class="active">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <span class="material-icons">arrow_back</span>
+      <div class="title">Mobile首頁管理</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main mobile-management">
+    <!-- 共同宣言管理 -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>共同宣言管理</h2>
+        <div class="action-buttons">
+          <button class="btn-primary">編輯順序</button>
+          <button class="btn-primary">編輯文字</button>
+        </div>
+      </div>
+      <div class="content-list">
+        <div class="list-item">
+          <span class="order-number">1</span>
+          <span class="text">攜手合作，共創永續未來</span>
+          <div class="item-actions">
+            <span class="material-icons">arrow_upward</span>
+            <span class="material-icons">arrow_downward</span>
+            <span class="material-icons">edit</span>
+          </div>
+        </div>
+        <div class="list-item">
+          <span class="order-number">2</span>
+          <span class="text">誠信經營，維護商業道德</span>
+          <div class="item-actions">
+            <span class="material-icons">arrow_upward</span>
+            <span class="material-icons">arrow_downward</span>
+            <span class="material-icons">edit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSR行為準則管理 -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>CSR行為準則管理</h2>
+        <div class="action-buttons">
+          <button class="btn-primary">編輯內容</button>
+        </div>
+      </div>
+      <div class="content-preview">
+        <p>目前版本：2024年第1版</p>
+        <p>最後更新：2024/03/15</p>
+        <div class="preview-actions">
+          <button class="btn-secondary">預覽</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESG文件簽署管理 -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>ESG文件簽署管理</h2>
+        <div class="action-buttons">
+          <button class="btn-primary">新增文件</button>
+          <button class="btn-primary">管理文件</button>
+        </div>
+      </div>
+      <div class="document-list">
+        <div class="document-item">
+          <span class="material-icons">description</span>
+          <span class="doc-title">企業社會責任-自評表</span>
+          <div class="doc-actions">
+            <button class="btn-secondary">預覽</button>
+            <button class="btn-secondary">下載</button>
+          </div>
+        </div>
+        <div class="document-item">
+          <span class="material-icons">security</span>
+          <span class="doc-title">資訊安全及個資保護-自評表</span>
+          <div class="doc-actions">
+            <button class="btn-secondary">預覽</button>
+            <button class="btn-secondary">下載</button>
+          </div>
+        </div>
+        <div class="document-item">
+          <span class="material-icons">corporate_fare</span>
+          <span class="doc-title">供應商企業社會責任行為準則</span>
+          <div class="doc-actions">
+            <button class="btn-secondary">預覽</button>
+            <button class="btn-secondary">下載</button>
+          </div>
+        </div>
+        <div class="document-item">
+          <span class="material-icons">handshake</span>
+          <span class="doc-title">供應商誠信交易與廉潔承諾書</span>
+          <div class="doc-actions">
+            <button class="btn-secondary">預覽</button>
+            <button class="btn-secondary">下載</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 

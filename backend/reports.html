@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>報表管理 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html" class="active">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <span class="material-icons">arrow_back</span>
+      <div class="title">報表管理</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- 報表列表區域 -->
+    <div class="reports-section">
+      <div class="section-header">
+        <h2>報表類型</h2>
+      </div>
+      
+      <div class="reports-list">
+        <!-- 案件統計報表 -->
+        <div class="report-item">
+          <div class="report-icon">
+            <span class="material-icons">description</span>
+          </div>
+          <div class="report-info">
+            <div class="report-title">案件統計報表</div>
+            <div class="report-desc">統計案件次數、完成率、取消率及採購人員資訊</div>
+          </div>
+          <div class="report-filters">
+            <select>
+              <option>選擇時間範圍</option>
+              <option>本月</option>
+              <option>上月</option>
+              <option>本季</option>
+              <option>本年</option>
+            </select>
+            <select>
+              <option>選擇採購人員</option>
+              <option>全部</option>
+              <option>依部門</option>
+              <option>個別人員</option>
+            </select>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view">查看資料</button>
+            <button class="btn-download">下載報表</button>
+          </div>
+        </div>
+
+        <!-- Cost Down 統計報表 -->
+        <div class="report-item">
+          <div class="report-icon">
+            <span class="material-icons">trending_down</span>
+          </div>
+          <div class="report-info">
+            <div class="report-title">Cost Down 統計報表</div>
+            <div class="report-desc">降價幅度前五大廠商及產品類別排行</div>
+          </div>
+          <div class="report-filters">
+            <select>
+              <option>時間範圍</option>
+              <option>月度</option>
+              <option>季度</option>
+              <option>年度</option>
+            </select>
+            <select>
+              <option>排序方式</option>
+              <option>依降價幅度</option>
+              <option>依總金額</option>
+            </select>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view">查看資料</button>
+            <button class="btn-download">下載報表</button>
+          </div>
+        </div>
+
+        <!-- 平台使用率報表 -->
+        <div class="report-item">
+          <div class="report-icon">
+            <span class="material-icons">analytics</span>
+          </div>
+          <div class="report-info">
+            <div class="report-title">平台使用率報表</div>
+            <div class="report-desc">採購人員與供應商系統使用次數統計</div>
+          </div>
+          <div class="report-filters">
+            <select>
+              <option>使用者類型</option>
+              <option>採購人員</option>
+              <option>供應商</option>
+              <option>全部</option>
+            </select>
+            <select>
+              <option>統計週期</option>
+              <option>每日</option>
+              <option>每週</option>
+              <option>每月</option>
+            </select>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view">查看資料</button>
+            <button class="btn-download">下載報表</button>
+          </div>
+        </div>
+
+        <!-- 廠商配合度統計報表 -->
+        <div class="report-item">
+          <div class="report-icon">
+            <span class="material-icons">timer</span>
+          </div>
+          <div class="report-info">
+            <div class="report-title">廠商配合度統計報表</div>
+            <div class="report-desc">供應商回應時間統計分析</div>
+          </div>
+          <div class="report-filters">
+            <select>
+              <option>回應時間區間</option>
+              <option>4小時內</option>
+              <option>4-8小時</option>
+              <option>1-3天</option>
+              <option>3天以上</option>
+            </select>
+            <select>
+              <option>廠商類型</option>
+              <option>全部廠商</option>
+              <option>依產品類別</option>
+              <option>依合作狀態</option>
+            </select>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view">查看資料</button>
+            <button class="btn-download">下載報表</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 報表歷史記錄 -->
+    <div class="card table">
+      <div class="table-header">
+        <h2>報表歷史記錄</h2>
+        <div class="filter-group">
+          <select>
+            <option>報表類型</option>
+            <option>案件統計報表</option>
+            <option>Cost Down統計報表</option>
+            <option>平台使用率報表</option>
+            <option>廠商配合度報表</option>
+          </select>
+          <input type="date" placeholder="起始日期"/>
+          <input type="date" placeholder="結束日期"/>
+          <button>搜尋</button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>報表編號</th>
+            <th>報表名稱</th>
+            <th>報表類型</th>
+            <th>統計區間</th>
+            <th>產生日期</th>
+            <th>產生者</th>
+            <th>狀態</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>B6-1-2024001</td>
+            <td>2024年Q1案件統計報表</td>
+            <td>案件統計報表</td>
+            <td>2024/01-2024/03</td>
+            <td>2024/03/15</td>
+            <td>系統管理員</td>
+            <td><span class="tag enable">已完成</span></td>
+            <td class="actions">
+              <span class="material-icons" title="查看">visibility</span>
+              <span class="material-icons" title="下載">download</span>
+              <span class="material-icons" title="刪除">delete</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&laquo; 上一頁</button>
+        <span>第 1 頁，共 10 頁</span>
+        <button>下一頁 &raquo;</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 

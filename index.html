@@ -1,184 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOSACO</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">  
-    <link rel="stylesheet" href="css/style.min.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>供應商管理系統 - 平台選擇</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .system-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #333;
+    }
+
+    .system-title h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .system-title p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .platform-cards {
+      display: flex;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .platform-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .platform-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #2196F3;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .platform-card:hover::before {
+      opacity: 1;
+    }
+
+    .platform-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: #f5f9ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .platform-icon .material-icons {
+      font-size: 40px;
+      color: #2196F3;
+    }
+
+    .platform-card h2 {
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .platform-card p {
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .platform-card .features {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      color: #555;
+    }
+
+    .feature-item .material-icons {
+      color: #2196F3;
+      font-size: 20px;
+    }
+
+    .enter-button {
+      background: #2196F3;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .enter-button:hover {
+      background: #1976D2;
+    }
+
+    @media (max-width: 900px) {
+      .platform-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .platform-card {
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+  </style>
 </head>
 <body>
-    
-    <nav>
-        <div class="bg"></div>
-        <a href="#" class="cart"><img src="./images/icon_cart.png" alt="">カート</a>
-        <ul class="ul-0">
-            <li><a href="#"><img src="./images/icon_instagram.png" alt="">Instagram</a></li>
-            <li><a href="#"><img src="./images/icon_facebook.png" alt="">Facebook</a></li>
-            <li><a href="#"><img src="./images/icon_guide.png" alt="">買物ガイド</a></li>
-            <li><a href="#" class="top-r">マイページ／ログイン</a></li>
-        </ul>
-        <ul class="ul-1">
-            <li><a href="#">ブルワリーについて</a></li>
-            <li><a href="#">商品一覧</a></li>
-            <li><a href="#">お知らせ</a></li>
-        </ul>
-        <a href="#" class="logo z-top">
-            <img src="./images/logo.png" alt="TOSACO">
-        </a>
-        <ul class="ul-2">
-            <li><a href="#">TOSACOが買える店・飲める</a></li>
-            <li><a href="#">お問い合わせ</a></li>
-        </ul>
-    </nav>
-    <header>
-        <img src="./images/ph.jpg" alt="">
-        <div class="header-content">
-            <h2>おいしい高知の、</h2>
-            <h2>おいしいビール。</h2>
+  <div class="system-title">
+    <h1>CC公司</h1>
+    <p>請選擇要進入的平台</p>
+  </div>
+
+  <div class="platform-cards">
+    <!-- 供應商平台卡片 -->
+    <div class="platform-card" onclick="window.location.href='frontend/index.html'">
+      <div class="platform-icon">
+        <span class="material-icons">store</span>
+      </div>
+      <h2>供應商平台</h2>
+      <p>專為供應商設計的整合平台，提供完整的業務管理功能</p>
+      <div class="features">
+        <div class="feature-item">
+          <span class="material-icons">description</span>
+          <span>詢比議價案件管理</span>
         </div>
-    </header>
-    <div class="mount-left">
-        <img src="./images/mount_left.png">
-    </div>
-    <div class="mount-right">
-        <img src="./images/mount_right.png">
-    </div>
-    <div id="feature">
-        <div class="container row">
-            <div class="col-lg-3 col-md-6 col-12 feature-items">
-                <span>
-                    <h2>ここが</h2>
-                    <img src="./images/TOSACO_logo.png" class="font-img">
-                    <h2>の<br>特徴です</h2>
-                </span>
-                <div>
-                    <img src="https://tosaco-brewing.com/wptosaco/wp-content/themes/tosaco/images/home/feature/circle.png" class="circle show">
-                    <img src="https://tosaco-brewing.com/wptosaco/wp-content/themes/tosaco/images/home/feature/ph_bin02.png" class="bin02 show">
-                    <img src="https://tosaco-brewing.com/wptosaco/wp-content/themes/tosaco/images/home/feature/ph_bin01.png" class="bin01 show">
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 feature-items">
-                <img src="./images/ph01.png" alt="">
-                <div class="feature-content">
-                    <img src="./images/num1.png" class="font-img">
-                    <br>
-                    <h3>高知県産素材を</h3>
-                    <h3>つかったビール</h3>
-                </div>
-                <img src="./images/yuzu.gif" alt="" class="yuzu">
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 feature-items">
-                <img src="./images/ph02.png" alt="">
-                <div class="feature-content">
-                    <img src="./images/num2.png" class="font-img">
-                    <br>
-                    <h3>ビールが苦手な</h3>
-                    <h3>女性にも飲みやすい</h3>
-                </div>
-                <img src="./images/bird.gif" alt="" class="bird">
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 feature-items">
-                <img src="./images/ph03.png" alt="">
-                <div class="feature-content">
-                    <img src="./images/num3.png" class="font-img">
-                    <br>
-                    <h3>クラフト精神</h3>
-                </div>
-            </div>
-            <div class="more">
-                <img src="./images/person.gif" alt="" class="person">
-                <img src="./images/beer.gif" alt="" class="beer">
-                <div class="arrow">
-                    <a href="#">TOSACOについてへ</a>
-                </div>
-            </div>
+        <div class="feature-item">
+          <span class="material-icons">payment</span>
+          <span>付款查詢</span>
         </div>
-    </div>
-    <div class="home_news">
-        <div class="container row wide_1080">
-            <div class="col-12 news-item">
-                <div class="col-10 row">
-                    <span class="date">2021年09月14日</span>
-                    <li><a href="#" >お知らせ</a></li>
-                    <li><a href="#" class="news">【記事公開】フードペアリング～TOSACOOKIN’～第一弾「こめホワイトエール」×和食</a></li>
-                </div>
-                <div class="col-2 arrow-r"><a href="#" class="arrow">お知らせ一覧へ</a></div>   
-            </div>
-            <div class="col-12 row layout">
-                <div class="col-lg-6 col-sm-12 ">
-                    <a href=""><img src="./images/milkmango_thumbnail_1-640x480.jpg" alt=""></a>
-                </div>
-                <div class="col-lg-6 col-sm-12 ">
-                    <a href=""><img src="./images/season_akasiso_1-640x480.jpg" alt=""></a>
-                </div>
-            </div>
-            <div class="col-12 arrow-r"><a href="#" class="arrow">限定ビール一覧へ</a></div>
+        <div class="feature-item">
+          <span class="material-icons">eco</span>
+          <span>ESG文件簽署</span>
         </div>
-    </div>
-    <div id="home_product">
-        <div class="product_title">
-            <div class="row">
-                <div class="col-4 d-flex"><img src="./images/lineup_left.gif" alt=""></div>
-                <div class="col-4 d-flex">
-                    <h2>ラインナップ</h2>
-                    <p>TOSACOビールの全ラインナップ</p>
-                </div>
-                <div class="col-4 d-flex"><img src="./images/lineup_right.gif" alt=""></div>
-            </div>
+        <div class="feature-item">
+          <span class="material-icons">trending_down</span>
+          <span>碳排放資料</span>
         </div>
-        <div class="product_list">
-            <div class="row">
-                <div class="col-4 product_items">
-                    <a href="#" class="d-flex list link">
-                        <img src="images/thumb_arigatosaco-380x285.jpg" alt="">
-                        <span class="txt_inline">
-                            <h3>ありがとさこ（ヘイジーIPA）</h3>
-                            <p>感謝の気持ちを「移り変わるホップ」の味わいで表現</p>
-                        </span>
-                        <div class="price d-flex">
-                            <p>700円(税込)</p>
-                            <p>詳細へ</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4 product_items">
-                    <a href="#" class="d-flex list link">
-                        <img src="images/thumb_arigatosaco-380x285.jpg" alt="">
-                        <span class="txt_inline">
-                            <h3>ありがとさこ（ヘイジーIPA）</h3>
-                            <p>感謝の気持ちを「移り変わるホップ」の味わいで表現</p>
-                        </span> 
-                        <div class="price d-flex">
-                            <p>700円(税込)</p>
-                            <p>詳細へ</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4 product_items">
-                    <a href="#" class="d-flex list link">
-                        <img src="images/thumb_arigatosaco-380x285.jpg" alt="">
-                        <span class="txt_inline">
-                            <h3>ありがとさこ（ヘイジーIPA）</h3>
-                            <p>感謝の気持ちを「移り変わるホップ」の味わいで表現</p>
-                        </span>
-                        <div class="price d-flex">
-                            <p>700円(税込)</p>
-                            <p>詳細へ</p>
-                        </div> 
-                    </a>
-                </div>
-                <div class="col-12 arrow-r wide_1080"><a href="#" class="arrow">ライナップ一覧へ</a></div>
-            </div>
+      </div>
+      <button class="enter-button">
+        <span class="material-icons">login</span>
+        進入供應商平台
+      </button>
+    </div>
+
+    <!-- 供應商管理平台卡片 -->
+    <div class="platform-card" onclick="window.location.href='backend/index.html'">
+      <div class="platform-icon">
+        <span class="material-icons">admin_panel_settings</span>
+      </div>
+      <h2>供應商管理平台</h2>
+      <p>強大的後台管理系統，掌握所有供應商資訊</p>
+      <div class="features">
+        <div class="feature-item">
+          <span class="material-icons">people</span>
+          <span>供應商管理平台</span>
         </div>
-        
+        <div class="feature-item">
+          <span class="material-icons">campaign</span>
+          <span>訊息公告</span>
+        </div>
+        <div class="feature-item">
+          <span class="material-icons">assessment</span>
+          <span>報表管理</span>
+        </div>
+        <div class="feature-item">
+          <span class="material-icons">settings</span>
+          <span>系統設定</span>
+        </div>
+      </div>
+      <button class="enter-button">
+        <span class="material-icons">login</span>
+        進入管理平台
+      </button>
     </div>
-    <div class="home_bottom">
-            
-    </div>
-</div>
+  </div>
 </body>
-</html>
+</html> 

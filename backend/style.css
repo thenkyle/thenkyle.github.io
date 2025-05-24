@@ -1,0 +1,981 @@
+:root {
+  --accent: #2563eb;
+  --border: #e1e8ee;
+  --bg: #f5f5f5;
+  --text: #344155;
+  --muted: #6b7280;
+  --card-bg: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+/* 側邊選單 */
+.sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 20;
+}
+.sidebar .logo {
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  margin: 2px 0;
+}
+.sidebar nav a .material-icons {
+  font-size: 1.25rem;
+  color: var(--muted);
+  transition: all 0.3s ease;
+}
+.sidebar nav a.active .material-icons,
+.sidebar nav a:hover .material-icons {
+  color: #37a0ff;
+}
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: rgba(55, 160, 255, 0.1);
+  color: #37a0ff;
+  border-left: 3px solid #37a0ff;
+}
+/* 跑馬燈 */
+.ticker {
+  position: fixed;
+  top: 0;
+  left: 200px;
+  right: 0;
+  background: #e0f7fa;
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  z-index: 10;
+  min-width: calc(100% - 200px);
+}
+.ticker a {
+  color: var(--accent);
+  text-decoration: none;
+}
+/* Header */
+.header {
+  position: fixed;
+  top: 2rem;
+  left: 200px;
+  right: 0;
+  background: #fff;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px var(--shadow);
+  z-index: 9;
+  min-width: calc(100% - 200px);
+}
+.header .left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.header .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.header .right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  width: 200px;
+}
+.header .material-icons {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+/* 主內容 */
+.main {
+  margin-top: 6rem;
+  margin-left: 40px;
+  padding: 1rem 2rem;
+  overflow: auto;
+  height: calc(100vh - 4.5rem);
+  flex: 1;
+  min-width: 0;
+}
+/* 篩選區 */
+.filter-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+  align-items: end;
+}
+.filter-card .form-group {
+  min-width: 0;
+}
+.filter-card .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+.filter-card .form-group input,
+.filter-card .form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--text);
+  height: 36px;
+}
+.filter-card .buttons {
+  grid-column: -3 / -1;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.filter-card .buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  height: 36px;
+  min-width: 80px;
+}
+.filter-card .buttons .btn-primary {
+  background: #37a0ff;
+  color: white;
+}
+.filter-card .buttons .btn-secondary {
+  background: #f0f0f0;
+  color: var(--text);
+}
+/* 摘要卡片 */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.card {
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+.card.summary {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 140px;
+}
+.card.summary .icon {
+  font-size: 1.5rem;
+  color: #37a0ff;
+}
+.card.summary .number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-top: 0.5rem;
+}
+.card.summary .label {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: auto;
+}
+.card.summary .description {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.card.summary .filter-items {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+.card.summary .filter-items select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--text);
+}
+.card.summary .buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+.card.summary .buttons button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #37a0ff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.card.summary .buttons button:hover {
+  background: #2980b9;
+}
+.card.summary .buttons button:last-child {
+  background: #f0f0f0;
+  color: var(--text);
+}
+.card.summary .buttons button:last-child:hover {
+  background: #e0e0e0;
+}
+/* 報表區域 */
+.reports-section {
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+  margin-bottom: 2rem;
+}
+.section-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+.reports-list {
+  padding: 1rem;
+}
+.report-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  gap: 1.5rem;
+}
+.report-item:last-child {
+  border-bottom: none;
+}
+.report-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(55, 160, 255, 0.1);
+}
+.report-icon .material-icons {
+  font-size: 24px;
+  color: #37a0ff;
+}
+.report-info {
+  flex: 2;
+}
+.report-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.report-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.report-filters {
+  flex: 3;
+  display: flex;
+  gap: 0.75rem;
+}
+.report-filters select {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--text);
+}
+.report-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.report-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+.btn-view {
+  background: #37a0ff;
+  color: white;
+}
+.btn-view:hover {
+  background: #2980b9;
+}
+.btn-download {
+  background: #f0f0f0;
+  color: var(--text);
+}
+.btn-download:hover {
+  background: #e0e0e0;
+}
+/* 表格樣式 */
+.card.table {
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+  overflow: hidden;
+}
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.filter-group {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+.filter-group select,
+.filter-group input {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+}
+.filter-group button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #37a0ff;
+  color: white;
+  cursor: pointer;
+}
+.filter-group .form-group {
+  min-width: 150px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+thead {
+  background: #37a0ff;
+  color: white;
+}
+tbody tr:hover {
+  background: rgba(55, 160, 255, 0.05);
+}
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+.tag.enable {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.tag.disable {
+  background: #e05555;
+  color: #ffffff;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.actions .material-icons {
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+.actions .material-icons:hover {
+  background: rgba(55, 160, 255, 0.1);
+  color: #37a0ff;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.pagination button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: #fff;
+  cursor: pointer;
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pagination span {
+  color: var(--muted);
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+.form-group input,
+.form-group select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--text);
+  width: 100%;
+}
+
+/* 供應商管理頁面特定樣式 */
+.vendor-management .card.summary {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 140px;
+}
+
+.vendor-management .card.summary .icon {
+  font-size: 1.5rem;
+  color: #37a0ff;
+}
+
+.vendor-management .card.summary .number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-top: 0.5rem;
+}
+
+.vendor-management .card.summary .label {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+.vendor-management .filter-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  align-items: end;
+}
+
+.vendor-management .filter-card .form-group {
+  min-width: 0;
+}
+
+.vendor-management .filter-card .buttons {
+  grid-column: -2 / -1;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.vendor-management .filter-card .buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.vendor-management .filter-card .buttons button:last-child {
+  background: #37a0ff;
+  color: white;
+}
+
+.vendor-management .filter-card .buttons button.reset {
+  background: #f0f0f0;
+  color: var(--text);
+}
+
+/* 其他頁面的篩選卡片樣式 */
+.filter-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.filter-card .buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.filter-card button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.filter-card button.reset {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* 通用輸入框和按鈕樣式 */
+input[type="text"],
+select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--text);
+  min-width: 180px;
+  height: 36px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.action-buttons button,
+.btn-primary {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #37a0ff;
+  color: white;
+  cursor: pointer;
+  height: 36px;
+  min-width: 80px;
+}
+
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #f0f0f0;
+  color: var(--text);
+  cursor: pointer;
+  height: 36px;
+  min-width: 80px;
+}
+
+/* 系統管理頁面樣式 */
+.system-management .function-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.system-management .function-card button {
+  width: 100%;
+  text-align: center;
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  color: var(--text);
+  height: 36px;
+}
+
+/* 訊息公告頁面樣式 */
+.announcement .search-area {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.announcement .search-area input,
+.announcement .search-area select {
+  flex: 0 1 auto;
+}
+
+.announcement .action-buttons {
+  margin-left: auto;
+}
+
+/* 詢比議價案件管理頁面樣式 */
+.price-inquiry .search-area {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.price-inquiry .search-area input,
+.price-inquiry .search-area select {
+  flex: 0 1 auto;
+}
+
+.price-inquiry .action-buttons {
+  margin-left: auto;
+}
+
+/* 狀態標籤樣式 */
+.status-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  background: rgba(55, 160, 255, 0.1);
+  color: #37a0ff;
+}
+
+.status-tag.active {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status-tag.pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+/* Mobile首頁管理樣式 */
+.mobile-management .section-card {
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.mobile-management .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-management .section-header h2 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* 共同宣言列表樣式 */
+.content-list .list-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  background: #f8f9fa;
+}
+
+.content-list .order-number {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #37a0ff;
+  color: white;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.content-list .text {
+  flex: 1;
+  color: var(--text);
+}
+
+.content-list .item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.content-list .item-actions .material-icons {
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: var(--muted);
+}
+
+.content-list .item-actions .material-icons:hover {
+  background: rgba(55, 160, 255, 0.1);
+  color: #37a0ff;
+}
+
+/* CSR內容預覽樣式 */
+.content-preview {
+  background: #f8f9fa;
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.content-preview p {
+  margin: 0.5rem 0;
+  color: var(--text);
+}
+
+/* 文件列表樣式 */
+.document-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+.document-item .material-icons {
+  font-size: 1.5rem;
+  color: #37a0ff;
+  margin-right: 1rem;
+}
+
+.document-item .doc-title {
+  flex: 1;
+  color: var(--text);
+}
+
+.document-item .doc-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.document-item .doc-actions button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* 移除舊的樣式 */
+.search-area,
+.action-buttons {
+  display: none;
+}
+
+/* 登入頁面樣式 */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+}
+
+.login-box {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.login-box .logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-box .logo .material-icons {
+  font-size: 2.5rem;
+  color: #37a0ff;
+  background: rgba(55, 160, 255, 0.1);
+  padding: 1rem;
+  border-radius: 16px;
+}
+
+.login-box .logo-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.login-form {
+  display: none;
+}
+
+.login-form.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-form h2 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: #1e293b;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon .material-icons {
+  position: absolute;
+  left: 1rem;
+  color: #94a3b8;
+  font-size: 1.25rem;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.input-with-icon input:focus {
+  outline: none;
+  border-color: #37a0ff;
+  box-shadow: 0 0 0 3px rgba(55, 160, 255, 0.1);
+}
+
+.input-with-icon input::placeholder {
+  color: #94a3b8;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-actions .btn-primary {
+  width: 100%;
+  padding: 0.875rem;
+  background: #37a0ff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.form-actions .btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.form-actions .btn-primary:active {
+  transform: translateY(0);
+}
+
+.form-actions .btn-link {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.form-actions .btn-link:hover {
+  color: #37a0ff;
+}

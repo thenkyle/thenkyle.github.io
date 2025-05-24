@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>系統管理 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html" class="active">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <span class="material-icons">arrow_back</span>
+      <div class="title">系統管理</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main system-management">
+    <div class="cards">
+      <div class="function-card">
+        <span class="material-icons">manage_accounts</span>
+        <h3>使用者管理</h3>
+        <button>管理</button>
+      </div>
+      <div class="function-card">
+        <span class="material-icons">admin_panel_settings</span>
+        <h3>權限設定</h3>
+        <button>設定</button>
+      </div>
+      <div class="function-card">
+        <span class="material-icons">settings</span>
+        <h3>系統設定</h3>
+        <button>設定</button>
+      </div>
+      <div class="function-card">
+        <span class="material-icons">history</span>
+        <h3>系統日誌</h3>
+        <button>查看</button>
+      </div>
+    </div>
+
+    <!-- 系統日誌 -->
+    <div class="card table">
+      <table>
+        <thead>
+          <tr>
+            <th>時間</th>
+            <th>操作者</th>
+            <th>操作類型</th>
+            <th>描述</th>
+            <th>IP位址</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024/03/15 14:30</td>
+            <td>系統管理員</td>
+            <td>使用者管理</td>
+            <td>新增使用者帳號</td>
+            <td>192.168.1.100</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&laquo; 上一頁</button>
+        <span>第 1 頁，共 10 頁</span>
+        <button>下一頁 &raquo;</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 

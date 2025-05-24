@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="index.html" class="active">
+        <span class="material-icons">dashboard</span>
+        首頁
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="esg.html">
+        <span class="material-icons">description</span>
+        ESG文件簽署
+      </a>
+      <a href="carbon.html">
+        <span class="material-icons">eco</span>
+        碳排放資料
+      </a>
+      <a href="green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    <div>【重要公告】年度 ESG 文件即將到期，請盡快完成更新</div>
+    <a href="#">查看詳情</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <div class="title">供應商平台</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- 摘要卡片 -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <span class="material-icons icon">pending_actions</span>
+        <div class="number">3</div>
+        <div class="label">待處理案件</div>
+      </div>
+      <div class="summary-card">
+        <span class="material-icons icon">description</span>
+        <div class="number">2</div>
+        <div class="label">待簽署文件</div>
+      </div>
+      <div class="summary-card">
+        <span class="material-icons icon">payments</span>
+        <div class="number">5</div>
+        <div class="label">待收款項</div>
+      </div>
+      <div class="summary-card">
+        <span class="material-icons icon">eco</span>
+        <div class="number">1</div>
+        <div class="label">ESG待辦事項</div>
+      </div>
+    </div>
+
+    <!-- 最新案件 -->
+    <div class="table-card">
+      <h2>最新案件</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>案件編號</th>
+            <th>案件名稱</th>
+            <th>類型</th>
+            <th>狀態</th>
+            <th>截止日期</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PI-2024001</td>
+            <td>2024年度辦公用品採購</td>
+            <td>詢價</td>
+            <td><span class="status-tag active">進行中</span></td>
+            <td>2024/03/30</td>
+            <td class="actions">
+              <span class="material-icons">visibility</span>
+              <span class="material-icons">edit</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 待簽署文件 -->
+    <div class="table-card">
+      <h2>待簽署文件</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>文件編號</th>
+            <th>文件名稱</th>
+            <th>類型</th>
+            <th>到期日</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ESG-2024001</td>
+            <td>2024年度ESG自評表</td>
+            <td>ESG文件</td>
+            <td>2024/03/30</td>
+            <td class="actions">
+              <span class="material-icons">visibility</span>
+              <span class="material-icons">edit</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html> 

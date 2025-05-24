@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>訊息公告 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html" class="active">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <span class="material-icons">arrow_back</span>
+      <div class="title">訊息公告</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main announcement">
+    <div class="filter-card">
+      <div class="form-group">
+        <label for="announcement-title">公告標題</label>
+        <input type="text" id="announcement-title" placeholder="請輸入公告標題"/>
+      </div>
+      <div class="form-group">
+        <label for="announcement-type">公告類型</label>
+        <select id="announcement-type">
+          <option value="">請選擇類型</option>
+          <option value="1">重要通知</option>
+          <option value="2">一般通知</option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button class="btn-secondary">重設</button>
+        <button class="btn-primary">查詢</button>
+        <button class="btn-primary">+ 新增公告</button>
+      </div>
+    </div>
+
+    <!-- 公告列表 -->
+    <div class="card table">
+      <table>
+        <thead>
+          <tr>
+            <th>公告日期</th>
+            <th>類型</th>
+            <th>標題</th>
+            <th>發布者</th>
+            <th>狀態</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024/03/15</td>
+            <td><span class="tag enable">重要通知</span></td>
+            <td>年度 ESG 文件更新通知</td>
+            <td>系統管理員</td>
+            <td>已發布</td>
+            <td class="actions">
+              <span class="material-icons">visibility</span>
+              <span class="material-icons">edit</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&laquo; 上一頁</button>
+        <span>第 1 頁，共 10 頁</span>
+        <button>下一頁 &raquo;</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>詢比議價案件管理 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html" class="active">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請供應商更新&nbsp;&nbsp;
+    <a href="#">管理公告</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <span class="material-icons">arrow_back</span>
+      <div class="title">詢比議價案件管理</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main price-inquiry">
+    <div class="filter-card">
+      <div class="form-group">
+        <label for="case-number">案件編號</label>
+        <input type="text" id="case-number" placeholder="請輸入案件編號"/>
+      </div>
+      <div class="form-group">
+        <label for="case-name">案件名稱</label>
+        <input type="text" id="case-name" placeholder="請輸入案件名稱"/>
+      </div>
+      <div class="form-group">
+        <label for="case-status">案件狀態</label>
+        <select id="case-status">
+          <option value="">請選擇狀態</option>
+          <option value="1">進行中</option>
+          <option value="2">已完成</option>
+          <option value="3">已取消</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="case-type">案件類型</label>
+        <select id="case-type">
+          <option value="">請選擇類型</option>
+          <option value="1">詢價</option>
+          <option value="2">比價</option>
+          <option value="3">議價</option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button class="btn-secondary">重設</button>
+        <button class="btn-primary">查詢</button>
+        <button class="btn-primary">+ 新增案件</button>
+      </div>
+    </div>
+
+    <!-- 案件列表 -->
+    <div class="card table">
+      <table>
+        <thead>
+          <tr>
+            <th>案件編號</th>
+            <th>案件名稱</th>
+            <th>類型</th>
+            <th>狀態</th>
+            <th>建立日期</th>
+            <th>截止日期</th>
+            <th>參與廠商數</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PI-2024001</td>
+            <td>2024年度辦公用品採購</td>
+            <td>詢價</td>
+            <td><span class="tag enable">進行中</span></td>
+            <td>2024/03/15</td>
+            <td>2024/03/30</td>
+            <td>5</td>
+            <td class="actions">
+              <span class="material-icons">visibility</span>
+              <span class="material-icons">edit</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&laquo; 上一頁</button>
+        <span>第 1 頁，共 10 頁</span>
+        <button>下一頁 &raquo;</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 
