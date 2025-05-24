@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>公告訊息 - 供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    .tab.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .announcement-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .announcement-item {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+    }
+
+    .announcement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .announcement-title {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .announcement-date {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .announcement-content {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      background: #f1f5f9;
+      color: var(--text-secondary);
+      gap: 0.25rem;
+    }
+
+    .tag.important {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .tag.update {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .tag.event {
+      background: #d1fae5;
+      color: #047857;
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="dashboard.html">
+        <span class="material-icons">home</span>
+        首頁
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="announcements.html" class="active">
+        <span class="material-icons">campaign</span>
+        公告訊息
+      </a>
+      <a href="payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="esg.html">
+        <span class="material-icons">eco</span>
+        ESG文件簽署
+      </a>
+      <a href="carbon.html">
+        <span class="material-icons">cloud</span>
+        碳排放資料
+      </a>
+      <a href="green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請盡速更新&nbsp;&nbsp;
+    <a href="announcements.html">查看詳情</a>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div style="padding: 1.5rem;">
+        <h2 style="margin-bottom: 1.5rem;">公告訊息</h2>
+        
+        <!-- 分類標籤 -->
+        <div class="tabs">
+          <div class="tab active">全部</div>
+          <div class="tab">重要公告</div>
+          <div class="tab">系統更新</div>
+          <div class="tab">活動訊息</div>
+        </div>
+
+        <!-- 公告列表 -->
+        <div class="announcement-list">
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <h3 class="announcement-title">年度 ESG 文件更新通知</h3>
+              <span class="announcement-date">2024/03/10</span>
+            </div>
+            <div class="announcement-content">
+              親愛的供應商夥伴，提醒您年度 ESG 文件將於 2024/04/30 到期，請於期限前完成更新。如有任何問題，請聯繫您的業務窗口。
+            </div>
+            <div class="tags">
+              <span class="tag important">
+                <span class="material-icons" style="font-size: 1rem;">priority_high</span>
+                重要
+              </span>
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <h3 class="announcement-title">系統維護通知</h3>
+              <span class="announcement-date">2024/03/08</span>
+            </div>
+            <div class="announcement-content">
+              系統將於 2024/03/15 凌晨 00:00-04:00 進行例行維護，維護期間將暫停服務，造成不便敬請見諒。
+            </div>
+            <div class="tags">
+              <span class="tag update">
+                <span class="material-icons" style="font-size: 1rem;">system_update</span>
+                系統
+              </span>
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <h3 class="announcement-title">2024 供應商永續發展論壇</h3>
+              <span class="announcement-date">2024/03/05</span>
+            </div>
+            <div class="announcement-content">
+              誠摯邀請您參加 2024 年供應商永續發展論壇，活動時間：2024/04/15 14:00-17:00，地點：台北國際會議中心。
+            </div>
+            <div class="tags">
+              <span class="tag event">
+                <span class="material-icons" style="font-size: 1rem;">event</span>
+                活動
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 
