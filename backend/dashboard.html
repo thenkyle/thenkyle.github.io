@@ -6,8 +6,84 @@
   <title>供應商管理平台</title>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Vuetify -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.7.0/dist/vuetify.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="./style.css" rel="stylesheet">
+  <style>
+    .dialog-form {
+      padding: 20px;
+    }
+    .required::after {
+      content: "*";
+      color: red;
+      margin-left: 4px;
+    }
+    .filter-card .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .filter-card .buttons .right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .dialog-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    .dialog {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      width: 90%;
+      max-width: 800px;
+      z-index: 1001;
+    }
+    .dialog.active,
+    .dialog-overlay.active {
+      display: block;
+    }
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .dialog-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .dialog-close {
+      cursor: pointer;
+      padding: 5px;
+    }
+    .dialog-body {
+      margin-bottom: 20px;
+    }
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+    .form-group {
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
 
@@ -127,12 +203,97 @@
         </select>
       </div>
       <div class="buttons">
-        <button class="reset">重設</button>
-        <button>查詢</button>
+        <div class="left-buttons">
+          <a href="add-supplier.html" class="btn-primary">
+            新增案件
+          </a>
+        </div>
+        <div class="right-buttons">
+          <button class="btn-secondary reset">重設</button>
+          <button class="btn-primary search">查詢</button>
+        </div>
       </div>
     </div>
 
-    
+    <!-- Dialog 背景遮罩 -->
+    <div class="dialog-overlay" id="dialogOverlay"></div>
+
+    <!-- 新增案件 Dialog -->
+    <div class="dialog" id="addDialog">
+      <div class="dialog-header">
+        <div class="dialog-title">新增案件</div>
+        <span class="material-icons dialog-close" onclick="closeDialog()">close</span>
+      </div>
+      <div class="dialog-body">
+        <form id="addForm">
+          <!-- 基本資料 -->
+          <div class="form-section">
+            <h3>基本資料</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="required" for="company-name">公司名稱</label>
+                <input type="text" id="company-name" required>
+              </div>
+              <div class="form-group">
+                <label class="required" for="tax-id">統一編號</label>
+                <input type="text" id="tax-id" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="required" for="supplier-type">類型</label>
+                <select id="supplier-type" required>
+                  <option value="">請選擇類型</option>
+                  <option value="manufacturer">製造商</option>
+                  <option value="agent">代理商</option>
+                  <option value="distributor">經銷商</option>
+                  <option value="other">其他</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="required" for="supplier-nature">性質</label>
+                <select id="supplier-nature" required>
+                  <option value="">請選擇性質</option>
+                  <option value="self">自營</option>
+                  <option value="outsource">外包</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="required" for="supplier-status">狀態</label>
+                <select id="supplier-status" required>
+                  <option value="">請選擇狀態</option>
+                  <option value="1">啟用</option>
+                  <option value="0">停用</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 明細欄位 -->
+          <div class="form-section">
+            <h3>明細欄位</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="required" for="business-id">業務編號</label>
+                <input type="text" id="business-id" required>
+              </div>
+              <div class="form-group">
+                <label class="required" for="business-name">業務姓名</label>
+                <input type="text" id="business-name" required>
+              </div>
+              <div class="form-group">
+                <label class="required" for="contact-phone">連絡電話</label>
+                <input type="tel" id="contact-phone" required>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn-secondary" onclick="closeDialog()">取消</button>
+        <button class="btn-primary" onclick="saveCase()">儲存</button>
+      </div>
+    </div>
 
     <!-- 近期供應商清單 -->
     <div class="card table">
@@ -187,5 +348,85 @@
 
   </main>
 
+  <!-- Vue & Vuetify -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.7.0/dist/vuetify.min.js"></script>
+  <script>
+    new Vue({
+      el: '.vendor-management',
+      vuetify: new Vuetify(),
+      data: {
+        dialog: false,
+        loading: false,
+        supplierTypes: ['製造商', '代理商', '經銷商', '其他'],
+        formData: {
+          taxId: '',
+          supplierName: '',
+          contactPerson: '',
+          contactPhone: '',
+          email: '',
+          supplierType: '',
+          remarks: ''
+        }
+      },
+      methods: {
+        openAddDialog() {
+          this.dialog = true;
+        },
+        async saveCase() {
+          if (!this.$refs.form.validate()) {
+            return;
+          }
+          
+          this.loading = true;
+          try {
+            // 這裡加入儲存案件的 API 呼叫
+            await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 呼叫
+            this.dialog = false;
+            // 可以加入成功提示
+          } catch (error) {
+            console.error('儲存失敗:', error);
+            // 可以加入錯誤提示
+          } finally {
+            this.loading = false;
+          }
+        }
+      }
+    });
+  </script>
+
+  <script>
+    // Dialog 控制
+    function openDialog() {
+      document.getElementById('dialogOverlay').classList.add('active');
+      document.getElementById('addDialog').classList.add('active');
+    }
+
+    function closeDialog() {
+      document.getElementById('dialogOverlay').classList.remove('active');
+      document.getElementById('addDialog').classList.remove('active');
+    }
+
+    async function saveCase() {
+      const form = document.getElementById('addForm');
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      try {
+        // 這裡加入儲存案件的 API 呼叫
+        await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 呼叫
+        closeDialog();
+        // 可以加入成功提示
+      } catch (error) {
+        console.error('儲存失敗:', error);
+        // 可以加入錯誤提示
+      }
+    }
+
+    // 點擊遮罩關閉 Dialog
+    document.getElementById('dialogOverlay').addEventListener('click', closeDialog);
+  </script>
 </body>
 </html>

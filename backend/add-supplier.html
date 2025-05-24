@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>新增供應商 - 供應商管理平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="./style.css" rel="stylesheet">
+  <style>
+    .main {
+      padding: 1.5rem;
+      background: #f8fafc;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .section-title .material-icons {
+      font-size: 1.25rem;
+    }
+
+    .section-title span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-size: 0.875rem;
+    }
+
+    .form-group label.required::after {
+      content: "*";
+      color: #dc2626;
+      margin-left: 0.25rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.625rem 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+      background: white;
+      color: var(--text);
+      font-size: 0.875rem;
+    }
+
+    .form-group input::placeholder,
+    .form-group select::placeholder {
+      color: #94a3b8;
+    }
+
+    .business-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .business-section .section-title {
+      margin-bottom: 0;
+    }
+
+    .add-button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .business-item {
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .business-item .remove-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: #dc2626;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .save-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .save-button:hover {
+      background: #1d4ed8;
+    }
+
+    .save-button .material-icons {
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商管理平台</div>
+    <nav>
+      <a href="dashboard.html" class="active">
+        <span class="material-icons">people</span>
+        供應商管理
+      </a>
+      <a href="price-inquiry.html">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件管理
+      </a>
+      <a href="announcements.html">
+        <span class="material-icons">campaign</span>
+        訊息公告
+      </a>
+      <a href="mobile.html">
+        <span class="material-icons">phone_android</span>
+        Mobile 首頁
+      </a>
+      <a href="reports.html">
+        <span class="material-icons">assessment</span>
+        報表管理
+      </a>
+      <a href="system.html">
+        <span class="material-icons">settings</span>
+        系統管理
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <a href="dashboard.html" class="back-button">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <div class="title">新增供應商</div>
+    </div>
+    <div class="right">
+      <span class="material-icons">account_circle</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <form id="supplierForm" onsubmit="return saveSupplier(event)">
+      <!-- 基本資料 -->
+      <div class="section-title">
+        <span class="material-icons">business</span>
+        <span>基本資料</span>
+      </div>
+      <div class="content-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required" for="company-name">公司名稱</label>
+            <input type="text" id="company-name" name="companyName" required placeholder="請輸入公司名稱">
+          </div>
+          <div class="form-group">
+            <label class="required" for="tax-id">統一編號</label>
+            <input type="text" id="tax-id" name="taxId" required placeholder="請輸入統一編號" maxlength="8">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required" for="supplier-type">類型</label>
+            <select id="supplier-type" name="supplierType" required>
+              <option value="">請選擇類型</option>
+              <option value="manufacturer">製造商</option>
+              <option value="agent">代理商</option>
+              <option value="distributor">經銷商</option>
+              <option value="other">其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="required" for="supplier-nature">性質</label>
+            <select id="supplier-nature" name="supplierNature" required>
+              <option value="">請選擇性質</option>
+              <option value="self">自營</option>
+              <option value="outsource">外包</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="required" for="supplier-status">狀態</label>
+            <select id="supplier-status" name="supplierStatus" required>
+              <option value="">請選擇狀態</option>
+              <option value="1">啟用</option>
+              <option value="0">停用</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 業務人員資料 -->
+      <div class="business-section">
+        <div class="section-title">
+          <span class="material-icons">groups</span>
+          <span>業務人員資料</span>
+        </div>
+        <button type="button" class="add-button" onclick="addBusinessPerson()">
+          <span class="material-icons">add</span>
+          新增業務人員
+        </button>
+      </div>
+      <div class="content-card">
+        <div id="businessList">
+          <!-- 業務人員項目將由 JavaScript 動態添加 -->
+        </div>
+      </div>
+
+      <!-- 儲存按鈕 -->
+      <button type="submit" class="save-button">
+        <span class="material-icons">save</span>
+        儲存
+      </button>
+    </form>
+  </main>
+
+  <script>
+    // 業務人員計數器
+    let businessCounter = 0;
+
+    // 新增業務人員
+    function addBusinessPerson() {
+      const businessList = document.getElementById('businessList');
+      const businessItem = document.createElement('div');
+      businessItem.className = 'business-item';
+      businessItem.id = `business-${businessCounter}`;
+      
+      businessItem.innerHTML = `
+        <button type="button" class="remove-button" onclick="removeBusinessPerson(${businessCounter})">
+          <span class="material-icons">close</span>
+        </button>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="required" for="business-id-${businessCounter}">業務編號</label>
+            <input type="text" id="business-id-${businessCounter}" 
+                   name="business[${businessCounter}].id" 
+                   required 
+                   placeholder="請輸入業務編號">
+          </div>
+          <div class="form-group">
+            <label class="required" for="business-name-${businessCounter}">業務姓名</label>
+            <input type="text" id="business-name-${businessCounter}" 
+                   name="business[${businessCounter}].name" 
+                   required 
+                   placeholder="請輸入業務姓名">
+          </div>
+          <div class="form-group">
+            <label class="required" for="business-phone-${businessCounter}">連絡電話</label>
+            <input type="tel" id="business-phone-${businessCounter}" 
+                   name="business[${businessCounter}].phone" 
+                   required 
+                   placeholder="請輸入連絡電話">
+          </div>
+        </div>
+      `;
+      
+      businessList.appendChild(businessItem);
+      businessCounter++;
+    }
+
+    // 移除業務人員
+    function removeBusinessPerson(id) {
+      const businessItem = document.getElementById(`business-${id}`);
+      businessItem.remove();
+    }
+
+    // 儲存供應商資料
+    function saveSupplier(event) {
+      event.preventDefault();
+      
+      // 檢查是否至少有一個業務人員
+      if (document.getElementById('businessList').children.length === 0) {
+        alert('請至少新增一位業務人員');
+        return false;
+      }
+
+      // 取得表單資料
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+      
+      // 這裡可以加入 API 呼叫來儲存資料
+      console.log('儲存的資料:', data);
+      
+      // 儲存成功後返回列表頁
+      window.location.href = 'dashboard.html';
+      return false;
+    }
+
+    // 頁面載入時自動新增一個業務人員欄位
+    window.addEventListener('load', () => {
+      addBusinessPerson();
+    });
+  </script>
+</body>
+</html> 
