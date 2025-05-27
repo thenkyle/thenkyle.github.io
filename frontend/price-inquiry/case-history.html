@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>案件歷程 - 供應商平台</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    /* 頁面標題區域樣式 */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-button {
+      padding: 0.5rem;
+      border: none;
+      background: none;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button:hover {
+      background: var(--background);
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* 案件資訊樣式 */
+    .case-info {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .case-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+
+    .case-meta {
+      display: flex;
+      gap: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    /* 歷程時間軸樣式 */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--primary);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .timeline-type {
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .type-status {
+      background: #f0f9ff;
+      color: #0369a1;
+    }
+
+    .type-quote {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .type-requirement {
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .type-delivery {
+      background: #faf5ff;
+      color: #6b21a8;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .timeline-title {
+      font-weight: 500;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+
+    .timeline-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    .timeline-details {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+    }
+
+    .timeline-attachment {
+      margin-top: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .timeline-attachment:hover {
+      text-decoration: underline;
+    }
+
+    /* 篩選器樣式 */
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      background: white;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .filter-button:hover {
+      background: #f8fafc;
+    }
+
+    .filter-button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- 側邊選單 -->
+  <aside class="sidebar">
+    <div class="logo">供應商平台</div>
+    <nav>
+      <a href="../dashboard.html">
+        <span class="material-icons">home</span>
+        Mobile首頁
+      </a>
+      <a href="./index.html" class="active">
+        <span class="material-icons">request_quote</span>
+        詢比議價案件
+      </a>
+      <a href="../announcements.html">
+        <span class="material-icons">campaign</span>
+        公告訊息
+      </a>
+      <!-- <a href="../payment.html">
+        <span class="material-icons">payments</span>
+        付款查詢
+      </a>
+      <a href="../csr.html">
+        <span class="material-icons">policy</span>
+        CSR行為準則
+      </a>
+      <a href="../esg.html">
+        <span class="material-icons">eco</span>
+        ESG文件簽署
+      </a>
+      <a href="../carbon.html">
+        <span class="material-icons">cloud</span>
+        碳排放資料
+      </a>
+      <a href="../green.html">
+        <span class="material-icons">forest</span>
+        綠色採購
+      </a> -->
+    </nav>
+  </aside>
+
+  <!-- 跑馬燈 -->
+  <div class="ticker">
+    【重要公告】年度 ESG 文件即將到期，請盡速更新&nbsp;&nbsp;
+    <a href="../announcements.html">查看詳情</a>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div style="padding: 1.5rem;">
+        <!-- 頁面標題 -->
+        <div class="page-header">
+          <button class="back-button" onclick="history.back()">
+            <span class="material-icons">arrow_back</span>
+          </button>
+          <h2 class="page-title">案件歷程</h2>
+        </div>
+
+        <!-- 案件資訊 -->
+        <div class="case-info">
+          <h3 class="case-title">IT設備更新專案</h3>
+          <div class="case-meta">
+            <div>案件編號：RFQ-2024-002</div>
+            <div>發布日期：2024/03/05</div>
+            <div>截止日期：2024/03/20</div>
+          </div>
+        </div>
+
+        <!-- 篩選器 -->
+        <div class="filters">
+          <button class="filter-button active" onclick="filterHistory('all')">
+            <span class="material-icons">list</span>
+            全部
+          </button>
+          <button class="filter-button" onclick="filterHistory('status')">
+            <span class="material-icons">info</span>
+            狀態更新
+          </button>
+          <button class="filter-button" onclick="filterHistory('quote')">
+            <span class="material-icons">description</span>
+            報價相關
+          </button>
+          <button class="filter-button" onclick="filterHistory('requirement')">
+            <span class="material-icons">assignment</span>
+            需求變更
+          </button>
+          <button class="filter-button" onclick="filterHistory('delivery')">
+            <span class="material-icons">local_shipping</span>
+            交期相關
+          </button>
+        </div>
+
+        <!-- 歷程時間軸 -->
+        <div class="timeline">
+          <div class="timeline-item" data-type="quote">
+            <div class="timeline-header">
+              <div class="timeline-date">2024/03/15 16:45</div>
+              <div class="timeline-type type-quote">報價相關</div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-title">更新報價單 v2</div>
+              <div class="timeline-description">根據新規格需求提交更新後的報價</div>
+              <div class="timeline-details">
+                <div>報價總金額：NT$ 750,000</div>
+                <div>預估交期：2024/04/30</div>
+                <div>備註：包含無線滑鼠配件及安裝設定服務</div>
+              </div>
+              <a href="#" class="timeline-attachment">
+                <span class="material-icons">attach_file</span>
+                報價單v2.pdf
+              </a>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-type="requirement">
+            <div class="timeline-header">
+              <div class="timeline-date">2024/03/12 14:30</div>
+              <div class="timeline-type type-requirement">需求變更</div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-title">規格需求變更</div>
+              <div class="timeline-description">採購單位更新了設備規格需求</div>
+              <div class="timeline-details">
+                <div style="color: #dc2626;">- 移除：15吋筆記型電腦 x 10台</div>
+                <div style="color: #059669;">+ 新增：14吋筆記型電腦 x 15台</div>
+                <div style="color: #059669;">+ 新增：無線滑鼠 x 15個</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-type="quote">
+            <div class="timeline-header">
+              <div class="timeline-date">2024/03/10 15:30</div>
+              <div class="timeline-type type-quote">報價相關</div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-title">提交初版報價單 v1</div>
+              <div class="timeline-description">根據原始需求提交首次報價</div>
+              <div class="timeline-details">
+                <div>報價總金額：NT$ 600,000</div>
+                <div>預估交期：2024/04/15</div>
+                <div>備註：含基本安裝設定服務</div>
+              </div>
+              <a href="#" class="timeline-attachment">
+                <span class="material-icons">attach_file</span>
+                報價單v1.pdf
+              </a>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-type="delivery">
+            <div class="timeline-header">
+              <div class="timeline-date">2024/03/07 11:20</div>
+              <div class="timeline-type type-delivery">交期相關</div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-title">確認初始交期</div>
+              <div class="timeline-description">設定標準交貨時程</div>
+              <div class="timeline-details">
+                <div>預計交期：2024/04/15</div>
+                <div>備註：含基本安裝設定時間</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-type="status">
+            <div class="timeline-header">
+              <div class="timeline-date">2024/03/05 09:00</div>
+              <div class="timeline-type type-status">狀態更新</div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-title">案件發布</div>
+              <div class="timeline-description">案件已發布，開始接受報價</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 篩選歷程記錄
+    function filterHistory(type) {
+      // 更新篩選按鈕狀態
+      document.querySelectorAll('.filter-button').forEach(button => {
+        button.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      // 篩選歷程項目
+      const items = document.querySelectorAll('.timeline-item');
+      items.forEach(item => {
+        if (type === 'all' || item.dataset.type === type) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html> 

@@ -329,7 +329,7 @@
     <nav>
       <a href="../dashboard.html">
         <span class="material-icons">home</span>
-        首頁
+        Mobile首頁
       </a>
       <a href="./index.html" class="active">
         <span class="material-icons">request_quote</span>
@@ -339,7 +339,7 @@
         <span class="material-icons">campaign</span>
         公告訊息
       </a>
-      <a href="../payment.html">
+      <!-- <a href="../payment.html">
         <span class="material-icons">payments</span>
         付款查詢
       </a>
@@ -358,7 +358,7 @@
       <a href="../green.html">
         <span class="material-icons">forest</span>
         綠色採購
-      </a>
+      </a> -->
     </nav>
   </aside>
 
@@ -406,16 +406,16 @@
 
         <!-- 標籤頁 -->
         <div class="tabs">
-          <div class="tab">案件進度</div>
+          <div class="tab active">案件進度</div>
           <div class="tab">相關文件</div>
           <div class="tab">需求更新歷程</div>
           <div class="tab">報價回覆/變更歷程</div>
           <div class="tab">交期歷程</div>
-          <div class="tab active">Team+紀錄</div>
+          <div class="tab">Team+紀錄</div>
         </div>
 
-        <!-- 案件進度時間軸 (預設隱藏) -->
-        <div class="timeline" style="display: none;">
+        <!-- 案件進度時間軸 (預設顯示) -->
+        <div class="timeline" id="progress-timeline">
           <div class="timeline-item">
             <div class="timeline-date">2024/03/10 15:30</div>
             <div class="timeline-content">
@@ -440,7 +440,7 @@
         </div>
 
         <!-- 相關文件 (預設隱藏) -->
-        <div class="document-list" style="display: none;">
+        <div class="document-list" id="documents" style="display: none;">
           <div class="document-item">
             <div class="document-icon">
               <span class="material-icons">description</span>
@@ -478,7 +478,7 @@
         </div>
 
         <!-- 需求更新歷程 (預設隱藏) -->
-        <div class="timeline" style="display: none;">
+        <div class="timeline" id="requirement-timeline" style="display: none;">
           <div class="timeline-item">
             <div class="timeline-date">2024/03/12 14:30</div>
             <div class="timeline-content">
@@ -502,8 +502,8 @@
           </div>
         </div>
 
-        <!-- 報價回覆/變更歷程 -->
-        <div class="timeline">
+        <!-- 報價回覆/變更歷程 (預設隱藏) -->
+        <div class="timeline" id="quote-timeline" style="display: none;">
           <div class="timeline-item">
             <div class="timeline-date">2024/03/15 16:45</div>
             <div class="timeline-content">
@@ -554,8 +554,8 @@
           </div>
         </div>
 
-        <!-- 交期歷程 -->
-        <div class="timeline">
+        <!-- 交期歷程 (預設隱藏) -->
+        <div class="timeline" id="delivery-timeline" style="display: none;">
           <div class="timeline-item">
             <div class="timeline-date">2024/03/12 14:30</div>
             <div class="timeline-content">
@@ -595,8 +595,8 @@
           </div>
         </div>
 
-        <!-- Team+ 聊天紀錄 -->
-        <div class="chat-container">
+        <!-- Team+ 聊天紀錄 (預設隱藏) -->
+        <div class="chat-container" id="team-chat" style="display: none;">
           <div class="chat-message">
             <div class="message-header">
               <div class="avatar">
@@ -663,7 +663,7 @@
         </div>
 
         <!-- 無聊天紀錄顯示 (預設隱藏) -->
-        <div class="no-records" style="display: none; text-align: center; padding: 3rem 1rem;">
+        <div class="no-records" id="no-chat-records" style="display: none;">
           <span class="material-icons" style="font-size: 4rem; color: var(--text-secondary); margin-bottom: 1rem;">
             chat_off
           </span>
@@ -692,6 +692,18 @@
   </main>
 
   <script>
+    // 頁面載入時初始化顯示狀態
+    document.addEventListener('DOMContentLoaded', () => {
+      // 確保只顯示第一個頁籤的內容
+      document.getElementById('progress-timeline').style.display = 'block';
+      document.getElementById('documents').style.display = 'none';
+      document.getElementById('requirement-timeline').style.display = 'none';
+      document.getElementById('quote-timeline').style.display = 'none';
+      document.getElementById('delivery-timeline').style.display = 'none';
+      document.getElementById('team-chat').style.display = 'none';
+      document.getElementById('no-chat-records').style.display = 'none';
+    });
+
     // 標籤頁切換功能
     document.querySelectorAll('.tab').forEach((tab, index) => {
       tab.addEventListener('click', () => {
@@ -701,32 +713,46 @@
         tab.classList.add('active');
 
         // 隱藏所有內容
-        document.querySelectorAll('.timeline, .document-list, .chat-container, .no-records').forEach(content => {
-          content.style.display = 'none';
+        const allContents = [
+          'progress-timeline',
+          'documents',
+          'requirement-timeline',
+          'quote-timeline',
+          'delivery-timeline',
+          'team-chat',
+          'no-chat-records'
+        ];
+        allContents.forEach(id => {
+          document.getElementById(id).style.display = 'none';
         });
 
         // 顯示對應內容
-        const contents = [
-          document.querySelectorAll('.timeline')[0],
-          document.querySelector('.document-list'),
-          document.querySelectorAll('.timeline')[1],
-          document.querySelectorAll('.timeline')[2],
-          document.querySelectorAll('.timeline')[3],
-          document.querySelector('.chat-container')
-        ];
-
-        // 檢查是否有聊天紀錄
-        if (index === 5) { // Team+ 紀錄標籤
-          const hasRecords = document.querySelector('.chat-container').querySelectorAll('.chat-message').length > 0;
-          if (hasRecords) {
-            document.querySelector('.chat-container').style.display = 'flex';
-            document.querySelector('.no-records').style.display = 'none';
-          } else {
-            document.querySelector('.chat-container').style.display = 'none';
-            document.querySelector('.no-records').style.display = 'block';
-          }
-        } else {
-          contents[index].style.display = index === 1 ? 'grid' : 'block';
+        switch(index) {
+          case 0: // 案件進度
+            document.getElementById('progress-timeline').style.display = 'block';
+            break;
+          case 1: // 相關文件
+            document.getElementById('documents').style.display = 'grid';
+            break;
+          case 2: // 需求更新歷程
+            document.getElementById('requirement-timeline').style.display = 'block';
+            break;
+          case 3: // 報價回覆/變更歷程
+            document.getElementById('quote-timeline').style.display = 'block';
+            break;
+          case 4: // 交期歷程
+            document.getElementById('delivery-timeline').style.display = 'block';
+            break;
+          case 5: // Team+ 紀錄
+            const hasRecords = document.querySelector('.chat-container').querySelectorAll('.chat-message').length > 0;
+            if (hasRecords) {
+              document.getElementById('team-chat').style.display = 'flex';
+              document.getElementById('no-chat-records').style.display = 'none';
+            } else {
+              document.getElementById('team-chat').style.display = 'none';
+              document.getElementById('no-chat-records').style.display = 'block';
+            }
+            break;
         }
       });
     });

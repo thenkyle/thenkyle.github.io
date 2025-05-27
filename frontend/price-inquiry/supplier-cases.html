@@ -164,6 +164,37 @@
       font-size: 4rem;
       margin-bottom: 1rem;
     }
+
+    /* 頁面標題區域樣式 */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-button {
+      padding: 0.5rem;
+      border: none;
+      background: none;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button:hover {
+      background: var(--background);
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
@@ -173,7 +204,7 @@
     <nav>
       <a href="../dashboard.html">
         <span class="material-icons">home</span>
-        首頁
+        Mobile首頁
       </a>
       <a href="./index.html" class="active">
         <span class="material-icons">request_quote</span>
@@ -183,7 +214,7 @@
         <span class="material-icons">campaign</span>
         公告訊息
       </a>
-      <a href="../payment.html">
+      <!-- <a href="../payment.html">
         <span class="material-icons">payments</span>
         付款查詢
       </a>
@@ -202,7 +233,7 @@
       <a href="../green.html">
         <span class="material-icons">forest</span>
         綠色採購
-      </a>
+      </a> -->
     </nav>
   </aside>
 
@@ -216,7 +247,13 @@
   <main class="main">
     <div class="card">
       <div style="padding: 1.5rem;">
-        <h2 style="margin-bottom: 1.5rem;">案件管理</h2>
+        <!-- 頁面標題 -->
+        <div class="page-header">
+          <button class="back-button" onclick="history.back()">
+            <span class="material-icons">arrow_back</span>
+          </button>
+          <h2 class="page-title">案件管理</h2>
+        </div>
         
         <!-- 搜尋區域 -->
         <div class="search-container">
